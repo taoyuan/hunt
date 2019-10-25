@@ -1,7 +1,7 @@
 /* This Test File Is Used To Verify Many Combinations Of Using the Generate Test Runner Script */
 
 #include <stdio.h>
-#include "unity.h"
+#include "hunt.h"
 #include "Defs.h"
 #include "mockMock.h"
 
@@ -186,10 +186,10 @@ void suitetest_ThisTestPassesWhenCustomSuiteSetupAndTeardownRan(void)
 
 void test_ShouldCallMockInitAndVerifyFunctionsForEachTest(void)
 {
-    int passesOrIgnores = (int)(Unity.NumberOfTests - Unity.TestFailures);
-    TEST_ASSERT_EQUAL_MESSAGE(Unity.NumberOfTests,     mockMock_Init_Counter,    "Mock Init Should Be Called Once Per Test Started");
+    int passesOrIgnores = (int)(Hunt.NumberOfTests - Hunt.TestFailures);
+    TEST_ASSERT_EQUAL_MESSAGE(Hunt.NumberOfTests,     mockMock_Init_Counter,    "Mock Init Should Be Called Once Per Test Started");
     TEST_ASSERT_EQUAL_MESSAGE(passesOrIgnores,         mockMock_Verify_Counter,  "Mock Verify Should Be Called Once Per Test Passed");
-    TEST_ASSERT_EQUAL_MESSAGE(Unity.NumberOfTests - 1, mockMock_Destroy_Counter, "Mock Destroy Should Be Called Once Per Test Completed");
+    TEST_ASSERT_EQUAL_MESSAGE(Hunt.NumberOfTests - 1, mockMock_Destroy_Counter, "Mock Destroy Should Be Called Once Per Test Completed");
     TEST_ASSERT_EQUAL_MESSAGE(0,                       CMockMemFreeFinalCounter, "Mock MemFreeFinal Should Not Be Called Until End");
 }
 

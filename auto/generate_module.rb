@@ -1,5 +1,5 @@
 # ==========================================
-#   Unity Project - A Test Framework for C
+#   Hunt Project - A Test Framework for C
 #   Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
 #   [Released under MIT License. Please refer to license.txt for details]
 # ==========================================
@@ -13,7 +13,7 @@ require 'fileutils'
 require 'pathname'
 
 # TEMPLATE_TST
-TEMPLATE_TST ||= '#include "unity.h"
+TEMPLATE_TST ||= '#include "hunt.h"
 
 %2$s#include "%1$s.h"
 
@@ -43,13 +43,13 @@ TEMPLATE_INC ||= '#ifndef %3$s_H
 #endif // %3$s_H
 '.freeze
 
-class UnityModuleGenerator
+class HuntModuleGenerator
   ############################
   def initialize(options = nil)
-    @options = UnityModuleGenerator.default_options
+    @options = HuntModuleGenerator.default_options
     case options
     when NilClass then @options
-    when String   then @options.merge!(UnityModuleGenerator.grab_config(options))
+    when String   then @options.merge!(HuntModuleGenerator.grab_config(options))
     when Hash     then @options.merge!(options)
     else raise 'If you specify arguments, it should be a filename or a hash of options'
     end
@@ -114,8 +114,8 @@ class UnityModuleGenerator
     unless config_file.nil? || config_file.empty?
       require 'yaml'
       yaml_guts = YAML.load_file(config_file)
-      options.merge!(yaml_guts[:unity] || yaml_guts[:cmock])
-      raise "No :unity or :cmock section found in #{config_file}" unless options
+      options.merge!(yaml_guts[:hunt] || yaml_guts[:cmock])
+      raise "No :hunt or :cmock section found in #{config_file}" unless options
     end
     options
   end
@@ -261,7 +261,7 @@ if $0 == __FILE__
     when /^-i\"?(.+)\"?/  then options[:path_inc] = Regexp.last_match(1)
     when /^-t\"?(.+)\"?/  then options[:path_tst] = Regexp.last_match(1)
     when /^-n\"?(.+)\"?/  then options[:naming] = Regexp.last_match(1)
-    when /^-y\"?(.+)\"?/  then options = UnityModuleGenerator.grab_config(Regexp.last_match(1))
+    when /^-y\"?(.+)\"?/  then options = HuntModuleGenerator.grab_config(Regexp.last_match(1))
     when /^(\w+)/
       raise "ERROR: You can't have more than one Module name specified!" unless module_name.nil?
       module_name = arg
@@ -299,9 +299,9 @@ if $0 == __FILE__
 
   raise 'ERROR: You must have a Module name specified! (use option -h for help)' if module_name.nil?
   if destroy
-    UnityModuleGenerator.new(options).destroy(module_name)
+    HuntModuleGenerator.new(options).destroy(module_name)
   else
-    UnityModuleGenerator.new(options).generate(module_name)
+    HuntModuleGenerator.new(options).generate(module_name)
   end
 
 end

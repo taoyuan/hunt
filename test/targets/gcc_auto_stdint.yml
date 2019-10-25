@@ -33,9 +33,9 @@ compiler:
   defines:
     prefix: '-D'
     items:
-      - UNITY_INCLUDE_DOUBLE
-      - UNITY_SUPPORT_TEST_CASES
-      - UNITY_SUPPORT_64
+      - HUNT_INCLUDE_DOUBLE
+      - HUNT_SUPPORT_TEST_CASES
+      - HUNT_SUPPORT_64
   object_files:
     prefix: '-o'
     extension: '.o'
@@ -55,5 +55,5 @@ linker:
     extension: '.exe'
     destination: *build_path
 colour: true
-:unity:
+:hunt:
   :plugins: []

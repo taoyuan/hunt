@@ -9,8 +9,8 @@
 #                                                                                 #
 ###################################################################################
 
-unity_dir = include_directories('.')
+hunt_dir = include_directories('.')
 
-unity_lib = static_library(meson.project_name(), 
-    sources: ['unity.c'],
-    include_directories: unity_dir)
+hunt_lib = static_library(meson.project_name(),
+    sources: ['hunt.c'],
+    include_directories: hunt_dir)

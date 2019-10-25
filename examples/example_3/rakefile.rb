@@ -28,7 +28,7 @@ task :summary do
   report_summary
 end
 
-desc 'Build and test Unity'
+desc 'Build and test Hunt'
 task all: %i[clean unit summary]
 task default: %i[clobber all]
 task ci: [:default]

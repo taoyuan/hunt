@@ -34,7 +34,7 @@ def expect_test_file_to_exist(file)
   expect(File.exist?("sandbox/test/#{file}")).to be true
 end
 
-describe "UnityModuleGenerator" do
+describe "HuntModuleGenerator" do
 
   before do
     # clean sandbox and setup our "project" folders
@@ -60,7 +60,7 @@ describe "UnityModuleGenerator" do
       touch_src "meh.h"
       touch_test "Testmeh.c"
       expect {
-        UnityModuleGenerator.new(@options).generate("meh")
+        HuntModuleGenerator.new(@options).generate("meh")
       }.to raise_error("ERROR: File meh already exists. Exiting.")
     end
 
@@ -69,7 +69,7 @@ describe "UnityModuleGenerator" do
       touch_src "meh.c"
       touch_src "meh.h"
 
-      UnityModuleGenerator.new(@options).generate("meh")
+      HuntModuleGenerator.new(@options).generate("meh")
 
       expect_test_file_to_exist "Testmeh.c"
     end
@@ -79,7 +79,7 @@ describe "UnityModuleGenerator" do
       create_src_with_known_content "meh.c"
       create_src_with_known_content "meh.h"
 
-      UnityModuleGenerator.new(@options).generate("meh")
+      HuntModuleGenerator.new(@options).generate("meh")
 
       expect_src_content_didnt_change "meh.c"
       expect_src_content_didnt_change "meh.c"
@@ -89,7 +89,7 @@ describe "UnityModuleGenerator" do
       # Create some files with known content.
       create_test_with_known_content "Testmeh.c"
 
-      UnityModuleGenerator.new(@options).generate("meh")
+      HuntModuleGenerator.new(@options).generate("meh")
 
       expect_test_content_didnt_change "Testmeh.c"
     end
@@ -112,7 +112,7 @@ describe "UnityModuleGenerator" do
         touch_test "Testmeh_conductor.c"
         touch_test "Testmeh_hardware.c"
         expect {
-          UnityModuleGenerator.new(@options).generate("meh")
+          HuntModuleGenerator.new(@options).generate("meh")
         }.to raise_error("ERROR: File meh_model already exists. Exiting.")
     end
 
@@ -123,7 +123,7 @@ describe "UnityModuleGenerator" do
       touch_src "meh_model.h"
       touch_src "meh_conductor.h"
 
-      UnityModuleGenerator.new(@options).generate("meh")
+      HuntModuleGenerator.new(@options).generate("meh")
 
       expect_src_file_to_exist "meh_hardware.h"
       expect_test_file_to_exist "Testmeh_model.c"
@@ -138,7 +138,7 @@ describe "UnityModuleGenerator" do
       create_src_with_known_content "meh_model.h"
       create_src_with_known_content "meh_model.c"
 
-      UnityModuleGenerator.new(@options).generate("meh")
+      HuntModuleGenerator.new(@options).generate("meh")
 
       expect_src_content_didnt_change "meh_model.c"
       expect_src_content_didnt_change "meh_model.c"
@@ -149,7 +149,7 @@ describe "UnityModuleGenerator" do
     it "does not alter existing test files" do
       create_test_with_known_content "Testmeh_model.c"
 
-      UnityModuleGenerator.new(@options).generate("meh")
+      HuntModuleGenerator.new(@options).generate("meh")
 
       expect_test_content_didnt_change "Testmeh_model.c"
     end

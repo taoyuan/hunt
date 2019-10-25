@@ -1,5 +1,5 @@
 # ==========================================
-#   Unity Project - A Test Framework for C
+#   Hunt Project - A Test Framework for C
 #   Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
 #   [Released under MIT License. Please refer to license.txt for details]
 # ==========================================
@@ -25,7 +25,7 @@ ifeq ($(shell uname -s), Darwin)
 C_COMPILER=clang
 endif
 
-UNITY_ROOT=../..
+HUNT_ROOT=../..
 
 CFLAGS=-std=c99
 CFLAGS += -Wall
@@ -45,8 +45,8 @@ CFLAGS += -Wold-style-definition
 TARGET_BASE1=all_tests
 TARGET1 = $(TARGET_BASE1)$(TARGET_EXTENSION)
 SRC_FILES1=\
-  $(UNITY_ROOT)/src/unity.c \
-  $(UNITY_ROOT)/extras/fixture/src/unity_fixture.c \
+  $(HUNT_ROOT)/src/hunt.c \
+  $(HUNT_ROOT)/extras/fixture/src/hunt_fixture.c \
   src/ProductionCode.c \
   src/ProductionCode2.c \
   test/TestProductionCode.c \
@@ -54,7 +54,7 @@ SRC_FILES1=\
   test/test_runners/TestProductionCode_Runner.c \
   test/test_runners/TestProductionCode2_Runner.c \
   test/test_runners/all_tests.c
-INC_DIRS=-Isrc -I$(UNITY_ROOT)/src -I$(UNITY_ROOT)/extras/fixture/src
+INC_DIRS=-Isrc -I$(HUNT_ROOT)/src -I$(HUNT_ROOT)/extras/fixture/src
 SYMBOLS=
 
 all: clean default

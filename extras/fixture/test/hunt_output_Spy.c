@@ -1,13 +1,13 @@
-/* Copyright (c) 2010 James Grenning and Contributed to Unity Project
+/* Copyright (c) 2010 James Grenning and Contributed to Hunt Project
  * ==========================================
- *  Unity Project - A Test Framework for C
+ *  Hunt Project - A Test Framework for C
  *  Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
  *  [Released under MIT License. Please refer to license.txt for details]
  * ========================================== */
 
 
-#include "unity_output_Spy.h"
-#include "unity_fixture.h"
+#include "hunt_output_Spy.h"
+#include "hunt_fixture.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -17,7 +17,7 @@ static int count;
 static char* buffer;
 static int spy_enable;
 
-void UnityOutputCharSpy_Create(int s)
+void HuntOutputCharSpy_Create(int s)
 {
     size = (s > 0) ? s : 0;
     count = 0;
@@ -27,13 +27,13 @@ void UnityOutputCharSpy_Create(int s)
     memset(buffer, 0, (size_t)size);
 }
 
-void UnityOutputCharSpy_Destroy(void)
+void HuntOutputCharSpy_Destroy(void)
 {
     size = 0;
     free(buffer);
 }
 
-void UnityOutputCharSpy_OutputChar(int c)
+void HuntOutputCharSpy_OutputChar(int c)
 {
     if (spy_enable)
     {
@@ -46,12 +46,12 @@ void UnityOutputCharSpy_OutputChar(int c)
     }
 }
 
-const char * UnityOutputCharSpy_Get(void)
+const char * HuntOutputCharSpy_Get(void)
 {
     return buffer;
 }
 
-void UnityOutputCharSpy_Enable(int enable)
+void HuntOutputCharSpy_Enable(int enable)
 {
     spy_enable = enable;
 }

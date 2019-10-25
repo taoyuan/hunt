@@ -1,4 +1,4 @@
-# Unity - Getting Started
+# Hunt - Getting Started
 
 ## Welcome
 
@@ -6,51 +6,51 @@ Congratulations. You're now the proud owner of your very own pile of bits! What
 are you going to do with all these ones and zeros? This document should be able
 to help you decide just that.
 
-Unity is a unit test framework. The goal has been to keep it small and
-functional. The core Unity test framework is three files: a single C file and a
+Hunt is a unit test framework. The goal has been to keep it small and
+functional. The core Hunt test framework is three files: a single C file and a
 couple header files. These team up to provide functions and macros to make
 testing easier.
 
-Unity was designed to be cross-platform. It works hard to stick with C standards
+Hunt was designed to be cross-platform. It works hard to stick with C standards
 while still providing support for the many embedded C compilers that bend the
-rules. Unity has been used with many compilers, including GCC, IAR, Clang,
+rules. Hunt has been used with many compilers, including GCC, IAR, Clang,
 Green Hills, Microchip, and MS Visual Studio. It's not much work to get it to
 work with a new target.
 
 
 ### Overview of the Documents
 
-#### Unity Assertions reference
+#### Hunt Assertions reference
 
 This document will guide you through all the assertion options provided by
-Unity. This is going to be your unit testing bread and butter. You'll spend more
-time with assertions than any other part of Unity.
+Hunt. This is going to be your unit testing bread and butter. You'll spend more
+time with assertions than any other part of Hunt.
 
 
-#### Unity Assertions Cheat Sheet
+#### Hunt Assertions Cheat Sheet
 
 This document contains an abridged summary of the assertions described in the
 previous document. It's perfect for printing and referencing while you
-familiarize yourself with Unity's options.
+familiarize yourself with Hunt's options.
 
 
-#### Unity Configuration Guide
+#### Hunt Configuration Guide
 
-This document is the one to reference when you are going to use Unity with a new
+This document is the one to reference when you are going to use Hunt with a new
 target or compiler. It'll guide you through the configuration options and will
 help you customize your testing experience to meet your needs.
 
 
-#### Unity Helper Scripts
+#### Hunt Helper Scripts
 
 This document describes the helper scripts that are available for simplifying
 your testing workflow. It describes the collection of optional Ruby scripts
-included in the auto directory of your Unity installation. Neither Ruby nor
-these scripts are necessary for using Unity. They are provided as a convenience
+included in the auto directory of your Hunt installation. Neither Ruby nor
+these scripts are necessary for using Hunt. They are provided as a convenience
 for those who wish to use them.
 
 
-#### Unity License
+#### Hunt License
 
 What's an open source project without a license file? This brief document
 describes the terms you're agreeing to when you use this software. Basically, we
@@ -60,33 +60,33 @@ don't blame us if you run into problems.
 
 ### Overview of the Folders
 
-If you have obtained Unity through Github or something similar, you might be
+If you have obtained Hunt through Github or something similar, you might be
 surprised by just how much stuff you suddenly have staring you in the face.
-Don't worry, Unity itself is very small. The rest of it is just there to make
+Don't worry, Hunt itself is very small. The rest of it is just there to make
 your life easier. You can ignore it or use it at your convenience. Here's an
 overview of everything in the project.
 
 - `src` - This is the code you care about! This folder contains a C file and two
-header files. These three files _are_ Unity.
+header files. These three files _are_ Hunt.
 - `docs` - You're reading this document, so it's possible you have found your way
 into this folder already. This is where all the handy documentation can be
 found.
-- `examples` - This contains a few examples of using Unity.
-- `extras` - These are optional add ons to Unity that are not part of the core
+- `examples` - This contains a few examples of using Hunt.
+- `extras` - These are optional add ons to Hunt that are not part of the core
 project. If you've reached us through James Grenning's book, you're going to
 want to look here.
-- `test` - This is how Unity and its scripts are all tested. If you're just using
-Unity, you'll likely never need to go in here. If you are the lucky team member
-who gets to port Unity to a new toolchain, this is a good place to verify
+- `test` - This is how Hunt and its scripts are all tested. If you're just using
+Hunt, you'll likely never need to go in here. If you are the lucky team member
+who gets to port Hunt to a new toolchain, this is a good place to verify
 everything is configured properly.
 - `auto` - Here you will find helpful Ruby scripts for simplifying your test
-workflow. They are purely optional and are not required to make use of Unity.
+workflow. They are purely optional and are not required to make use of Hunt.
 
 
 ## How to Create A Test File
 
 Test files are C files. Most often you will create a single test file for each C
-module that you want to test. The test file should include unity.h and the
+module that you want to test. The test file should include hunt.h and the
 header for your C module to be tested.
 
 Next, a test file will include a `setUp()` and `tearDown()` function. The setUp
@@ -102,13 +102,13 @@ an empty function for these.
 The majority of the file will be a series of test functions. Test functions
 follow the convention of starting with the word "test_" or "spec_". You don't HAVE
 to name them this way, but it makes it clear what functions are tests for other
-developers.  Also, the automated scripts that come with Unity or Ceedling will default
+developers.  Also, the automated scripts that come with Hunt or Ceedling will default
 to looking for test functions to be prefixed this way. Test functions take no arguments 
-and return nothing. All test accounting is handled internally in Unity.
+and return nothing. All test accounting is handled internally in Hunt.
 
 Finally, at the bottom of your test file, you will write a `main()` function.
-This function will call `UNITY_BEGIN()`, then `RUN_TEST` for each test, and
-finally `UNITY_END()`.This is what will actually trigger each of those test
+This function will call `HUNT_BEGIN()`, then `RUN_TEST` for each test, and
+finally `HUNT_END()`.This is what will actually trigger each of those test
 functions to run, so it is important that each function gets its own `RUN_TEST`
 call.
 
@@ -122,7 +122,7 @@ for you to include the main function in your test file at all.
 When you're done, your test file will look something like this:
 
 ```C
-#include "unity.h"
+#include "hunt.h"
 #include "file_to_test.h"
 
 void setUp(void) {
@@ -143,10 +143,10 @@ void test_function_should_doAlsoDoBlah(void) {
 
 // not needed when using generate_test_runner.rb
 int main(void) {
-    UNITY_BEGIN();
+    HUNT_BEGIN();
     RUN_TEST(test_function_should_doBlahAndBlah);
     RUN_TEST(test_function_should_doAlsoDoBlah);
-    return UNITY_END();
+    return HUNT_END();
 }
 ```
 
@@ -188,7 +188,7 @@ TEST_IGNORE_MESSAGE (message)
 Ignore this test and return immediately. Output a message stating why the test was ignored.
 
 ### Aborting Tests
-There are times when a test will contain an infinite loop on error conditions, or there may be reason to escape from the test early without executing the rest of the test.  A pair of macros support this functionality in Unity.  The first `TEST_PROTECT` sets up the feature, and handles emergency abort cases. `TEST_ABORT` can then be used at any time within the tests to return to the last `TEST_PROTECT` call.
+There are times when a test will contain an infinite loop on error conditions, or there may be reason to escape from the test early without executing the rest of the test.  A pair of macros support this functionality in Hunt.  The first `TEST_PROTECT` sets up the feature, and handles emergency abort cases. `TEST_ABORT` can then be used at any time within the tests to return to the last `TEST_PROTECT` call.
 
     TEST_PROTECT()
 
@@ -239,7 +239,7 @@ options for configuring these are discussed in the configuration guide.
 To get either to work, you might need to make a few changes to the file
 containing your register set (discussed later).
 
-In either case, a test is built by linking unity, the test file, and the C
+In either case, a test is built by linking hunt, the test file, and the C
 file(s) being tested. These files create an executable which can be run as the
 test set for that module. Then, this process is repeated for the next test file.
 This flexibility of separating tests into individual executables allows us to

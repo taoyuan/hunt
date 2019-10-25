@@ -5,18 +5,13 @@
  *  [Released under MIT License. Please refer to license.txt for details]
  * ========================================== */
 
-#include "hunt_fixture.h"
+#ifndef D_hunt_output_Spy_H
+#define D_hunt_output_Spy_H
 
-static void runAllTests(void)
-{
-    RUN_TEST_GROUP(HuntFixture);
-    RUN_TEST_GROUP(HuntCommandOptions);
-    RUN_TEST_GROUP(LeakDetection);
-    RUN_TEST_GROUP(InternalMalloc);
-}
+void HuntOutputCharSpy_Create(int s);
+void HuntOutputCharSpy_Destroy(void);
+void HuntOutputCharSpy_OutputChar(int c);
+const char * HuntOutputCharSpy_Get(void);
+void HuntOutputCharSpy_Enable(int enable);
 
-int main(int argc, const char* argv[])
-{
-    return HuntMain(argc, argv, runAllTests);
-}
-
+#endif

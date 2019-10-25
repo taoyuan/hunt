@@ -30,8 +30,8 @@ we aim for writing C code that is standards compliant (often C89... that seems
 to be a sweet spot that is almost always compatible). But it also means these
 tools are tolerant of things that aren't common. Some that aren't even
 compliant. There are configuration options to override the size of standard
-types. There are configuration options to force Unity to not use certain
-standard library functions. A lot of Unity is configurable and we have worked
+types. There are configuration options to force Hunt to not use certain
+standard library functions. A lot of Hunt is configurable and we have worked
 hard to make it not TOO ugly in the process.
 
 Similarly, our tools that parse C do their best. They aren't full C parsers
@@ -95,7 +95,7 @@ understanding of an algorithm.
 
 We like consistency, but we're not really obsessed with it. We try to name our
 configuration macros in a consistent fashion... you'll notice a repeated use of
-UNITY_EXCLUDE_BLAH or UNITY_USES_BLAH macros. This helps users avoid having to
+HUNT_EXCLUDE_BLAH or HUNT_USES_BLAH macros. This helps users avoid having to
 remember each macro's details.
 
 

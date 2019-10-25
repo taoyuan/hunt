@@ -11,13 +11,13 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 
-project(unity LANGUAGES C DESCRIPTION "C Unit testing framework.")
+project(hunt LANGUAGES C DESCRIPTION "C Unit testing framework.")
 
 
 add_subdirectory("src")
 
 
-target_include_directories("unity" 
+target_include_directories("hunt"
     PUBLIC 
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>"
         "$<INSTALL_INTERFACE:src>"
@@ -25,16 +25,16 @@ target_include_directories("unity"
     PRIVATE "src"
 )
 
-add_library("unity::framework" ALIAS "unity")
+add_library("hunt::framework" ALIAS "hunt")
 
-install(TARGETS "unity" EXPORT "unityConfig"
+install(TARGETS "hunt" EXPORT "huntConfig"
     ARCHIVE  DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_INSTALL_LIBDIR}"
     LIBRARY  DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_INSTALL_LIBDIR}"
     RUNTIME  DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_INSTALL_BINDIR}"
     INCLUDES DESTINATION "${CMAKE_INSTALL_LIBDIR}")
 
 install(DIRECTORY src/ DESTINATION src)
-install(EXPORT unityConfig DESTINATION share/unityConfig/cmake)
+install(EXPORT huntConfig DESTINATION share/huntConfig/cmake)
 
 # This makes the project importable from the build directory
-export(TARGETS unity FILE unityConfig.cmake)
+export(TARGETS hunt FILE huntConfig.cmake)

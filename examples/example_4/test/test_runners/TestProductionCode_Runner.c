@@ -3,9 +3,9 @@
 /*=======Test Runner Used To Run Each Test Below=====*/
 #define RUN_TEST(TestFunc, TestLineNum) \
 { \
-  Unity.CurrentTestName = #TestFunc; \
-  Unity.CurrentTestLineNumber = TestLineNum; \
-  Unity.NumberOfTests++; \
+  Hunt.CurrentTestName = #TestFunc; \
+  Hunt.CurrentTestLineNumber = TestLineNum; \
+  Hunt.NumberOfTests++; \
   if (TEST_PROTECT()) \
   { \
       setUp(); \
@@ -15,11 +15,11 @@
   { \
     tearDown(); \
   } \
-  UnityConcludeTest(); \
+  HuntConcludeTest(); \
 }
 
 /*=======Automagically Detected Files To Include=====*/
-#include "unity.h"
+#include "hunt.h"
 #include <setjmp.h>
 #include <stdio.h>
 #include "ProductionCode.h"
@@ -46,12 +46,12 @@ void resetTest(void)
 /*=======MAIN=====*/
 int main(void)
 {
-  UnityBegin("test/TestProductionCode.c");
+  HuntBegin("test/TestProductionCode.c");
   RUN_TEST(test_FindFunction_WhichIsBroken_ShouldReturnZeroIfItemIsNotInList_WhichWorksEvenInOurBrokenCode, 20);
   RUN_TEST(test_FindFunction_WhichIsBroken_ShouldReturnTheIndexForItemsInList_WhichWillFailBecauseOurFunctionUnderTestIsBroken, 30);
   RUN_TEST(test_FunctionWhichReturnsLocalVariable_ShouldReturnTheCurrentCounterValue, 41);
   RUN_TEST(test_FunctionWhichReturnsLocalVariable_ShouldReturnTheCurrentCounterValueAgain, 51);
   RUN_TEST(test_FunctionWhichReturnsLocalVariable_ShouldReturnCurrentCounter_ButFailsBecauseThisTestIsActuallyFlawed, 57);
 
-  return (UnityEnd());
+  return (HuntEnd());
 }

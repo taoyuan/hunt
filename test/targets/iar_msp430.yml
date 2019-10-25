@@ -36,14 +36,14 @@ compiler:
       - '../src/'
       - 'testdata/'
       - *unit_tests_path
-      - 'vendor\unity\src'
+      - 'vendor\hunt\src'
   defines:
     prefix: '-D'
     items:
       - '__MSP430F149__'
       - 'INT_WIDTH=16'
-      - 'UNITY_EXCLUDE_FLOAT'
-      - 'UNITY_SUPPORT_TEST_CASES'
+      - 'HUNT_EXCLUDE_FLOAT'
+      - 'HUNT_SUPPORT_TEST_CASES'
   object_files:
     prefix: '-o'
     extension: '.r43'
@@ -91,5 +91,5 @@ simulator:
     - [*core_config, 'MSP430F5438.ddf']
     - -d sim
 colour: true
-:unity:
+:hunt:
   :plugins: []

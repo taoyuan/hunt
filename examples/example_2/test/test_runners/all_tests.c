@@ -1,4 +1,4 @@
-#include "unity_fixture.h"
+#include "hunt_fixture.h"
 
 static void RunAllTests(void)
 {
@@ -8,5 +8,5 @@ static void RunAllTests(void)
 
 int main(int argc, const char * argv[])
 {
-  return UnityMain(argc, argv, RunAllTests);
+  return HuntMain(argc, argv, RunAllTests);
 }

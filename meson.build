@@ -11,7 +11,7 @@
 
 
 
-project('unity', 'c',
+project('hunt', 'c',
     license         : 'MIT',
     meson_version   : '>=0.52.0',
     default_options: [
@@ -66,4 +66,4 @@ endif
 
 subdir('src')
 
-unity_dep = declare_dependency(link_with: unity_lib, include_directories: unity_dir)
+hunt_dep = declare_dependency(link_with: hunt_lib, include_directories: hunt_dir)

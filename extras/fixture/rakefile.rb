@@ -1,5 +1,5 @@
 # ==========================================
-#   Unity Project - A Test Framework for C
+#   Hunt Project - A Test Framework for C
 #   Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
 #   [Released under MIT License. Please refer to license.txt for details]
 # ==========================================
@@ -30,7 +30,7 @@ task unit: [:prepare_for_tests] do
   run_tests
 end
 
-desc 'Build and test Unity Framework'
+desc 'Build and test Hunt Framework'
 task all: %i[clean unit]
 task default: %i[clobber all]
 task ci: %i[no_color default]

@@ -1,5 +1,5 @@
 # ==========================================
-#   Unity Project - A Test Framework for C
+#   Hunt Project - A Test Framework for C
 #   Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
 #   [Released under MIT License. Please refer to license.txt for details]
 # ==========================================
@@ -25,7 +25,7 @@ ifeq ($(shell uname -s), Darwin)
 C_COMPILER=clang
 endif
 
-UNITY_ROOT=../..
+HUNT_ROOT=../..
 
 CFLAGS=-std=c89
 CFLAGS += -Wall
@@ -46,9 +46,9 @@ TARGET_BASE1=test1
 TARGET_BASE2=test2
 TARGET1 = $(TARGET_BASE1)$(TARGET_EXTENSION)
 TARGET2 = $(TARGET_BASE2)$(TARGET_EXTENSION)
-SRC_FILES1=$(UNITY_ROOT)/src/unity.c src/ProductionCode.c  test/TestProductionCode.c  test/test_runners/TestProductionCode_Runner.c
-SRC_FILES2=$(UNITY_ROOT)/src/unity.c src/ProductionCode2.c test/TestProductionCode2.c test/test_runners/TestProductionCode2_Runner.c
-INC_DIRS=-Isrc -I$(UNITY_ROOT)/src
+SRC_FILES1=$(HUNT_ROOT)/src/hunt.c src/ProductionCode.c  test/TestProductionCode.c  test/test_runners/TestProductionCode_Runner.c
+SRC_FILES2=$(HUNT_ROOT)/src/hunt.c src/ProductionCode2.c test/TestProductionCode2.c test/test_runners/TestProductionCode2_Runner.c
+INC_DIRS=-Isrc -I$(HUNT_ROOT)/src
 SYMBOLS=
 
 all: clean default
@@ -60,9 +60,9 @@ default: $(SRC_FILES1) $(SRC_FILES2)
 	- ./$(TARGET2)
 
 test/test_runners/TestProductionCode_Runner.c: test/TestProductionCode.c
-	ruby $(UNITY_ROOT)/auto/generate_test_runner.rb test/TestProductionCode.c  test/test_runners/TestProductionCode_Runner.c
+	ruby $(HUNT_ROOT)/auto/generate_test_runner.rb test/TestProductionCode.c  test/test_runners/TestProductionCode_Runner.c
 test/test_runners/TestProductionCode2_Runner.c: test/TestProductionCode2.c
-	ruby $(UNITY_ROOT)/auto/generate_test_runner.rb test/TestProductionCode2.c test/test_runners/TestProductionCode2_Runner.c
+	ruby $(HUNT_ROOT)/auto/generate_test_runner.rb test/TestProductionCode2.c test/test_runners/TestProductionCode2_Runner.c
 
 clean:
 	$(CLEANUP) $(TARGET1) $(TARGET2)

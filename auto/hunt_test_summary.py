@@ -1,6 +1,6 @@
 #! python3
 # ==========================================
-#   Unity Project - A Test Framework for C
+#   Hunt Project - A Test Framework for C
 #   Copyright (c) 2015 Alexander Mueller / XelaRellum@web.de
 #   [Released under MIT License. Please refer to license.txt for details]
 #   Based on the ruby script by  Mike Karlesky, Mark VanderVoord, Greg Williams
@@ -10,7 +10,7 @@ import os
 import re
 from glob import glob
 
-class UnityTestSummary:
+class HuntTestSummary:
     def __init__(self):
         self.report = ''
         self.total_tests = 0
@@ -45,20 +45,20 @@ class UnityTestSummary:
         if self.ignored > 0:
             self.report += "\n"
             self.report += "--------------------------\n"
-            self.report += "UNITY IGNORED TEST SUMMARY\n"
+            self.report += "HUNT IGNORED TEST SUMMARY\n"
             self.report += "--------------------------\n"
             self.report += "\n".join(ignore_output)
 
         if self.failures > 0:
             self.report += "\n"
             self.report += "--------------------------\n"
-            self.report += "UNITY FAILED TEST SUMMARY\n"
+            self.report += "HUNT FAILED TEST SUMMARY\n"
             self.report += "--------------------------\n"
             self.report += '\n'.join(failure_output)
 
         self.report += "\n"
         self.report += "--------------------------\n"
-        self.report += "OVERALL UNITY TEST SUMMARY\n"
+        self.report += "OVERALL HUNT TEST SUMMARY\n"
         self.report += "--------------------------\n"
         self.report += "{total_tests} TOTAL TESTS {failures} TOTAL FAILURES {ignored} IGNORED\n".format(total_tests = self.total_tests, failures=self.failures, ignored=self.ignored)
         self.report += "\n"
@@ -75,7 +75,7 @@ class UnityTestSummary:
         print("\nERROR: ")
         if err_msg:
             print(err_msg)
-        print("\nUsage: unity_test_summary.py result_file_directory/ root_path/")
+        print("\nUsage: hunt_test_summary.py result_file_directory/ root_path/")
         print("     result_file_directory - The location of your results files.")
         print("                             Defaults to current directory if not specified.")
         print("                             Should end in / if specified.")
@@ -114,7 +114,7 @@ class UnityTestSummary:
 
 
 if __name__ == '__main__':
-  uts = UnityTestSummary()
+  uts = HuntTestSummary()
   try:
     #look in the specified or current directory for result files
     if len(sys.argv) > 1:

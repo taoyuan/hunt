@@ -37,7 +37,7 @@ compiler:
       - '..\src\'
       - 'testdata/'
       - *unit_tests_path
-      - 'vendor\unity\src\'
+      - 'vendor\hunt\src\'
       - 'iar\iar_v5\incIAR\'
   defines:
     prefix: '-D'
@@ -47,7 +47,7 @@ compiler:
       - TARGET_IS_TEMPEST_RB1
       - USE_ROM_DRIVERS
       - UART_BUFFERED
-      - UNITY_SUPPORT_64
+      - HUNT_SUPPORT_64
   object_files:
     prefix: '-o'
     extension: '.r79'
@@ -90,5 +90,5 @@ simulator:
     #- -d
     #- sim
 colour: true
-:unity:
+:hunt:
   :plugins: []

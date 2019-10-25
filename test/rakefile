@@ -1,5 +1,5 @@
 # ==========================================
-#   Unity Project - A Test Framework for C
+#   Hunt Project - A Test Framework for C
 #   Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
 #   [Released under MIT License. Please refer to license.txt for details]
 # ==========================================
@@ -29,12 +29,12 @@ include RakefileHelpers
 DEFAULT_CONFIG_FILE = 'gcc_auto_stdint.yml'
 configure_toolchain(DEFAULT_CONFIG_FILE)
 
-desc "Test unity with its own unit tests"
+desc "Test hunt with its own unit tests"
 task :unit => [:prepare_for_tests] do
   run_tests unit_test_files
 end
 
-desc "Test unity's helper scripts"
+desc "Test hunt's helper scripts"
 task :scripts => [:prepare_for_tests] do
   Dir['tests/test_*.rb'].each do |scriptfile|
     require "./"+scriptfile
@@ -51,7 +51,7 @@ task :summary do
   report_summary
 end
 
-desc "Build and test Unity"
+desc "Build and test Hunt"
 task :all => [:clean, :prepare_for_tests, :scripts, :unit, :style, :summary]
 task :default => [:clobber, :all]
 task :ci => [:no_color, :default]

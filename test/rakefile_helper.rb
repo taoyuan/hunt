@@ -1,12 +1,12 @@
 # ==========================================
-#   Unity Project - A Test Framework for C
+#   Hunt Project - A Test Framework for C
 #   Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
 #   [Released under MIT License. Please refer to license.txt for details]
 # ==========================================
 
 require 'yaml'
 require 'fileutils'
-require_relative '../auto/unity_test_summary'
+require_relative '../auto/hunt_test_summary'
 require_relative '../auto/generate_test_runner'
 require_relative '../auto/colour_reporter'
 
@@ -91,7 +91,7 @@ module RakefileHelpers
     defines = if $cfg['compiler']['defines']['items'].nil?
                 ''
               else
-                squash($cfg['compiler']['defines']['prefix'], $cfg['compiler']['defines']['items'] + ['UNITY_OUTPUT_CHAR=putcharSpy'] + ['UNITY_OUTPUT_CHAR_HEADER_DECLARATION="putcharSpy(int)"'] + inject_defines)
+                squash($cfg['compiler']['defines']['prefix'], $cfg['compiler']['defines']['items'] + ['HUNT_OUTPUT_CHAR=putcharSpy'] + ['HUNT_OUTPUT_CHAR_HEADER_DECLARATION="putcharSpy(int)"'] + inject_defines)
               end
     options = squash('', $cfg['compiler']['options'])
     includes = squash($cfg['compiler']['includes']['prefix'], $cfg['compiler']['includes']['items'])
@@ -178,7 +178,7 @@ module RakefileHelpers
   end
 
   def report_summary
-    summary = UnityTestSummary.new
+    summary = HuntTestSummary.new
     summary.root = __dir__
     results_glob = "#{$cfg['compiler']['build_path']}*.test*"
     results_glob.tr!('\\', '/')
@@ -188,7 +188,7 @@ module RakefileHelpers
   end
 
   def run_tests(test_files)
-    report 'Running Unity system tests...'
+    report 'Running Hunt system tests...'
 
     # Tack on TEST define for compiling unit tests
     load_configuration($cfg_file)
@@ -227,9 +227,9 @@ module RakefileHelpers
                       $cfg['compiler']['runner_path'] + runner_name
                     end
 
-      options = $cfg[:unity]
+      options = $cfg[:hunt]
       options[:use_param_tests] = test =~ /parameterized/ ? true : false
-      UnityTestRunnerGenerator.new(options).run(test, runner_path)
+      HuntTestRunnerGenerator.new(options).run(test, runner_path)
       obj_list << compile(runner_path, test_defines)
 
       # Build the test module

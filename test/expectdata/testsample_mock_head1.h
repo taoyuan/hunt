@@ -2,7 +2,7 @@
 #ifndef _TESTSAMPLE_MOCK_HEAD1_H
 #define _TESTSAMPLE_MOCK_HEAD1_H
 
-#include "unity.h"
+#include "hunt.h"
 #include "cmock.h"
 #include "funky.h"
 #include <setjmp.h>

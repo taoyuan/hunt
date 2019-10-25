@@ -11,8 +11,8 @@
 #      make | tee Output.txt
 #
 #    This script can handle the following output formats:
-#    - normal output (raw unity)
-#    - fixture output (unity_fixture.h/.c)
+#    - normal output (raw hunt)
+#    - fixture output (hunt_fixture.h/.c)
 #    - fixture output with verbose flag set ("-v")
 #
 #    To use this parser use the following command
@@ -57,7 +57,7 @@ class ParseOutput
   # Pushes the suite info as xml to the array list, which will be written later
   def push_xml_output_suite_info
     # Insert opening tag at front
-    heading = '<testsuite name="Unity" tests="' + @total_tests.to_s + '" failures="' + @test_failed.to_s + '"' + ' skips="' + @test_ignored.to_s + '">'
+    heading = '<testsuite name="Hunt" tests="' + @total_tests.to_s + '" failures="' + @test_failed.to_s + '"' + ' skips="' + @test_ignored.to_s + '">'
     @array_list.insert(0, heading)
     # Push back the closing tag
     @array_list.push '</testsuite>'
@@ -109,8 +109,8 @@ class ParseOutput
   end
 
   # Test was flagged as having passed so format the output.
-  # This is using the Unity fixture output and not the original Unity output.
-  def test_passed_unity_fixture(array)
+  # This is using the Hunt fixture output and not the original Hunt output.
+  def test_passed_hunt_fixture(array)
     class_name = array[0]
     test_name  = array[1]
     test_suite_verify(class_name)
@@ -120,8 +120,8 @@ class ParseOutput
   end
 
   # Test was flagged as having failed so format the output.
-  # This is using the Unity fixture output and not the original Unity output.
-  def test_failed_unity_fixture(array)
+  # This is using the Hunt fixture output and not the original Hunt output.
+  def test_failed_hunt_fixture(array)
     class_name = array[0]
     test_name  = array[1]
     test_suite_verify(class_name)
@@ -134,8 +134,8 @@ class ParseOutput
   end
 
   # Test was flagged as being ignored so format the output.
-  # This is using the Unity fixture output and not the original Unity output.
-  def test_ignored_unity_fixture(array)
+  # This is using the Hunt fixture output and not the original Hunt output.
+  def test_ignored_hunt_fixture(array)
     class_name = array[0]
     test_name  = array[1]
     reason = 'No reason given'
@@ -265,13 +265,13 @@ class ParseOutput
       if (line.start_with? 'TEST(') || (line.start_with? 'IGNORE_TEST(')
         line_array = prepare_fixture_line(line)
         if line.include? ' PASS'
-          test_passed_unity_fixture(line_array)
+          test_passed_hunt_fixture(line_array)
           @test_passed += 1
         elsif line.include? 'FAIL'
-          test_failed_unity_fixture(line_array)
+          test_failed_hunt_fixture(line_array)
           @test_failed += 1
         elsif line.include? 'IGNORE'
-          test_ignored_unity_fixture(line_array)
+          test_ignored_hunt_fixture(line_array)
           @test_ignored += 1
         end
       # normal output / fixture output (without verbose "-v")

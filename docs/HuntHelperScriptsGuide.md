@@ -1,9 +1,9 @@
-# Unity Helper Scripts
+# Hunt Helper Scripts
 
 ## With a Little Help From Our Friends
 
 Sometimes what it takes to be a really efficient C programmer is a little non-C.
-The Unity project includes a couple of Ruby scripts for making your life just a tad
+The Hunt project includes a couple of Ruby scripts for making your life just a tad
 easier. They are completely optional. If you choose to use them, you'll need a
 copy of Ruby, of course. Just install whatever the latest version is, and it is
 likely to work. You can find Ruby at [ruby-lang.org](https://ruby-labg.org/).
@@ -29,7 +29,7 @@ functions as a test case and builds up a test suite of them. For example, the
 following includes three test cases:
 
 ```C
-void testVerifyThatUnityIsAwesomeAndWillMakeYourLifeEasier(void)
+void testVerifyThatHuntIsAwesomeAndWillMakeYourLifeEasier(void)
 {
   ASSERT_TRUE(1);
 }
@@ -56,7 +56,7 @@ ruby generate_test_runner.rb TestFile.c
 ```
 
 You can also add a [YAML](http://www.yaml.org/) file to configure extra options.
-Conveniently, this YAML file is of the same format as that used by Unity and
+Conveniently, this YAML file is of the same format as that used by Hunt and
 CMock. So if you are using YAML files already, you can simply pass the very same
 file into the generator script.
 
@@ -69,7 +69,7 @@ example below. If you're wondering what some of these options do, you're going
 to love the next section of this document.
 
 ```YAML
-:unity:
+:hunt:
   :includes:
     - stdio.h
     - microdefs.h
@@ -100,7 +100,7 @@ options = {
   :suite_setup => "blah = malloc(1024);",
   :suite_teardown => "free(blah);"
 }
-UnityTestRunnerGenerator.new.run(testfile, runner_name, options)
+HuntTestRunnerGenerator.new.run(testfile, runner_name, options)
 ```
 
 If you have multiple files to generate in a build script (such as a Rakefile),
@@ -108,7 +108,7 @@ you might want to instantiate a generator object with your options and call it
 to generate each runner afterwards. Like thus:
 
 ```Ruby
-gen = UnityTestRunnerGenerator.new(options)
+gen = HuntTestRunnerGenerator.new(options)
 test_files.each do |f|
   gen.run(f, File.basename(f,'.c')+"Runner.c"
 end
@@ -135,7 +135,7 @@ Define this option with C code to be executed _before any_ test cases are run.
 
 Alternatively, if your C compiler supports weak symbols, you can leave this
 option unset and instead provide a `void suiteSetUp(void)` function in your test
-suite.  The linker will look for this symbol and fall back to a Unity-provided
+suite.  The linker will look for this symbol and fall back to a Hunt-provided
 stub if it is not found.
 
 
@@ -149,7 +149,7 @@ the exit code of `main`.  You can normally just return `num_failures`.
 Alternatively, if your C compiler supports weak symbols, you can leave this
 option unset and instead provide a `int suiteTearDown(int num_failures)`
 function in your test suite.  The linker will look for this symbol and fall
-back to a Unity-provided stub if it is not found.
+back to a Hunt-provided stub if it is not found.
 
 
 ##### `:enforce_strict_ordering`
@@ -167,15 +167,15 @@ runners to automatically include extern "C" support when they are generated.
 
 ##### `:mock_prefix` and `:mock_suffix`
 
-Unity automatically generates calls to Init, Verify and Destroy for every file
+Hunt automatically generates calls to Init, Verify and Destroy for every file
 included in the main test file that starts with the given mock prefix and ends
-with the given mock suffix, file extension not included. By default, Unity
+with the given mock suffix, file extension not included. By default, Hunt
 assumes a `Mock` prefix and no suffix.
 
 ##### `:plugins`
 
 This option specifies an array of plugins to be used (of course, the array can
-contain only a single plugin). This is your opportunity to enable support for
+contain only a single plugin). This is your opporthunt to enable support for
 CException support, which will add a check for unhandled exceptions in each
 test, reporting a failure if one is detected. To enable this feature using Ruby:
 
@@ -195,9 +195,9 @@ of plugins to CMock. You can just use the same array here. This script will just
 ignore the plugins that don't require additional support.
 
 
-### `unity_test_summary.rb`
+### `hunt_test_summary.rb`
 
-A Unity test file contains one or more test case functions. Each test case can
+A Hunt test file contains one or more test case functions. Each test case can
 pass, fail, or be ignored. Each test file is run individually producing results
 for its collection of test cases. A given project will almost certainly be
 composed of multiple test files. Therefore, the suite of tests is comprised of
@@ -211,7 +211,7 @@ ignored and failing tests in this project generate corresponding entries in the
 summary report.
 
 If you're interested in other (prettier?) output formats, check into the
-Ceedling build tool project (ceedling.sourceforge.net) that works with Unity and
+Ceedling build tool project (ceedling.sourceforge.net) that works with Hunt and
 CMock and supports xunit-style xml as well as other goodies.
 
 This script assumes the existence of files ending with the extensions
@@ -223,7 +223,7 @@ results, and aggregates and prints a summary. Calling it from the command line
 looks like this:
 
 ```Shell
-ruby unity_test_summary.rb build/test/
+ruby hunt_test_summary.rb build/test/
 ```
 
 You can optionally specify a root path as well. This is really helpful when you
@@ -231,31 +231,31 @@ are using relative paths in your tools' setup, but you want to pull the summary
 into an IDE like Eclipse for clickable shortcuts.
 
 ```Shell
-ruby unity_test_summary.rb build/test/ ~/projects/myproject/
+ruby hunt_test_summary.rb build/test/ ~/projects/myproject/
 ```
 
 Or, if you're more of a Windows sort of person:
 
 ```Shell
-ruby unity_test_summary.rb build\teat\ C:\projects\myproject\
+ruby hunt_test_summary.rb build\teat\ C:\projects\myproject\
 ```
 
 When configured correctly, you'll see a final summary, like so:
 
 ```Shell
 --------------------------
-UNITY IGNORED TEST SUMMARY
+HUNT IGNORED TEST SUMMARY
 --------------------------
 blah.c:22:test_sandwiches_should_HaveBreadOnTwoSides:IGNORE
 
 -------------------------
-UNITY FAILED TEST SUMMARY
+HUNT FAILED TEST SUMMARY
 -------------------------
 blah.c:87:test_sandwiches_should_HaveCondiments:FAIL:Expected 1 was 0
 meh.c:38:test_soda_should_BeCalledPop:FAIL:Expected "pop" was "coke"
 
 --------------------------
-OVERALL UNITY TEST SUMMARY
+OVERALL HUNT TEST SUMMARY
 --------------------------
 45 TOTAL TESTS 2 TOTAL FAILURES 1 IGNORED
 ```

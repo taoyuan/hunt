@@ -1,12 +1,12 @@
 # ==========================================
-#   Unity Project - A Test Framework for C
+#   Hunt Project - A Test Framework for C
 #   Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
 #   [Released under MIT License. Please refer to license.txt for details]
 # ==========================================
 
 require 'yaml'
 require 'fileutils'
-require_relative '../../auto/unity_test_summary'
+require_relative '../../auto/hunt_test_summary'
 require_relative '../../auto/generate_test_runner'
 require_relative '../../auto/colour_reporter'
 
@@ -53,7 +53,7 @@ module RakefileHelpers
     defines = if $cfg['compiler']['defines']['items'].nil?
                 ''
               else
-                squash($cfg['compiler']['defines']['prefix'], $cfg['compiler']['defines']['items'] + ['UNITY_OUTPUT_CHAR=UnityOutputCharSpy_OutputChar'] + ['UNITY_OUTPUT_CHAR_HEADER_DECLARATION=UnityOutputCharSpy_OutputChar\(int\)'])
+                squash($cfg['compiler']['defines']['prefix'], $cfg['compiler']['defines']['items'] + ['HUNT_OUTPUT_CHAR=HuntOutputCharSpy_OutputChar'] + ['HUNT_OUTPUT_CHAR_HEADER_DECLARATION=HuntOutputCharSpy_OutputChar\(int\)'])
               end
     options  = squash('', $cfg['compiler']['options'])
     includes = squash($cfg['compiler']['includes']['prefix'], $cfg['compiler']['includes']['items'])
@@ -64,8 +64,8 @@ module RakefileHelpers
 
   def compile(file, _defines = [])
     compiler = build_compiler_fields
-    unity_include = $cfg['compiler']['includes']['prefix'] + '../../src'
-    cmd_str = "#{compiler[:command]}#{compiler[:defines]}#{compiler[:options]}#{compiler[:includes]} #{unity_include} #{file} " \
+    hunt_include = $cfg['compiler']['includes']['prefix'] + '../../src'
+    cmd_str = "#{compiler[:command]}#{compiler[:defines]}#{compiler[:options]}#{compiler[:includes]} #{hunt_include} #{file} " \
               "#{$cfg['compiler']['object_files']['prefix']}#{$cfg['compiler']['object_files']['destination']}" \
               "#{File.basename(file, C_EXTENSION)}#{$cfg['compiler']['object_files']['extension']}"
 
@@ -127,7 +127,7 @@ module RakefileHelpers
   end
 
   def report_summary
-    summary = UnityTestSummary.new
+    summary = HuntTestSummary.new
     summary.root = __dir__
     results_glob = "#{$cfg['compiler']['build_path']}*.test*"
     results_glob.tr!('\\', '/')
@@ -137,7 +137,7 @@ module RakefileHelpers
   end
 
   def run_tests
-    report 'Running Unity system tests...'
+    report 'Running Hunt system tests...'
 
     # Tack on TEST define for compiling unit tests
     load_configuration($cfg_file)
@@ -148,7 +148,7 @@ module RakefileHelpers
     src_files  = Dir["#{__dir__}/src/*.c"]
     src_files += Dir["#{__dir__}/test/*.c"]
     src_files += Dir["#{__dir__}/test/main/*.c"]
-    src_files << '../../src/unity.c'
+    src_files << '../../src/hunt.c'
 
     # Build object files
     src_files.each { |f| compile(f, test_defines) }

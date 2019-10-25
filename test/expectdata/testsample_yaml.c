@@ -3,9 +3,9 @@
 /*=======Test Runner Used To Run Each Test Below=====*/
 #define RUN_TEST(TestFunc, TestLineNum) \
 { \
-  Unity.CurrentTestName = #TestFunc; \
-  Unity.CurrentTestLineNumber = TestLineNum; \
-  Unity.NumberOfTests++; \
+  Hunt.CurrentTestName = #TestFunc; \
+  Hunt.CurrentTestLineNumber = TestLineNum; \
+  Hunt.NumberOfTests++; \
   if (TEST_PROTECT()) \
   { \
     CEXCEPTION_T e; \
@@ -18,11 +18,11 @@
   { \
     tearDown(); \
   } \
-  UnityConcludeTest(); \
+  HuntConcludeTest(); \
 }
 
 /*=======Automagically Detected Files To Include=====*/
-#include "unity.h"
+#include "hunt.h"
 #include <setjmp.h>
 #include <stdio.h>
 #include "CException.h"
@@ -61,11 +61,11 @@ void resetTest(void)
 int main(void)
 {
   suite_setup();
-  UnityBegin("testdata/testsample.c");
+  HuntBegin("testdata/testsample.c");
   RUN_TEST(test_TheFirstThingToTest, 21);
   RUN_TEST(test_TheSecondThingToTest, 43);
   RUN_TEST(test_TheThirdThingToTest, 53);
   RUN_TEST(test_TheFourthThingToTest, 58);
 
-  return (UnityEnd());
+  return (HuntEnd());
 }

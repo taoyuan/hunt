@@ -8,6 +8,6 @@ You can build and test using rake. The rake version will let you test with gcc o
 versions of IAR.  You can tweak the yaml files to get those versions running.
 
 Ruby is required if you're using the rake version (obviously).  This version shows off most of
-Unity's advanced features (automatically creating test runners, fancy summaries, etc.)
+Hunt's advanced features (automatically creating test runners, fancy summaries, etc.)
 Without ruby, you have to maintain your own test runners.  Do that for a while and you'll learn
 why you really want to start using the Ruby tools.

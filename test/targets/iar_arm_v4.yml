@@ -34,12 +34,12 @@ compiler:
       - '..\src\'
       - 'testdata/'
       - *unit_tests_path
-      - 'vendor\unity\src\'
+      - 'vendor\hunt\src\'
   defines:
     prefix: '-D'
     items:
-      - UNITY_SUPPORT_64
-      - 'UNITY_SUPPORT_TEST_CASES'
+      - HUNT_SUPPORT_64
+      - 'HUNT_SUPPORT_TEST_CASES'
   object_files:
     prefix: '-o'
     extension: '.r79'
@@ -86,5 +86,5 @@ simulator:
     - -d
     - sim
 colour: true
-:unity:
+:hunt:
   :plugins: []

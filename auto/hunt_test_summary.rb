@@ -1,17 +1,17 @@
 # ==========================================
-#   Unity Project - A Test Framework for C
+#   Hunt Project - A Test Framework for C
 #   Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
 #   [Released under MIT License. Please refer to license.txt for details]
 # ==========================================
 
 # !/usr/bin/ruby
 #
-# unity_test_summary.rb
+# hunt_test_summary.rb
 #
 require 'fileutils'
 require 'set'
 
-class UnityTestSummary
+class HuntTestSummary
   include FileUtils::Verbose
 
   attr_reader :report, :total_tests, :failures, :ignored
@@ -49,7 +49,7 @@ class UnityTestSummary
     if @ignored > 0
       @report += "\n"
       @report += "--------------------------\n"
-      @report += "UNITY IGNORED TEST SUMMARY\n"
+      @report += "HUNT IGNORED TEST SUMMARY\n"
       @report += "--------------------------\n"
       @report += ignore_output.flatten.join("\n")
     end
@@ -57,14 +57,14 @@ class UnityTestSummary
     if @failures > 0
       @report += "\n"
       @report += "--------------------------\n"
-      @report += "UNITY FAILED TEST SUMMARY\n"
+      @report += "HUNT FAILED TEST SUMMARY\n"
       @report += "--------------------------\n"
       @report += failure_output.flatten.join("\n")
     end
 
     @report += "\n"
     @report += "--------------------------\n"
-    @report += "OVERALL UNITY TEST SUMMARY\n"
+    @report += "OVERALL HUNT TEST SUMMARY\n"
     @report += "--------------------------\n"
     @report += "#{@total_tests} TOTAL TESTS #{@failures} TOTAL FAILURES #{@ignored} IGNORED\n"
     @report += "\n"
@@ -73,7 +73,7 @@ class UnityTestSummary
   def usage(err_msg = nil)
     puts "\nERROR: "
     puts err_msg if err_msg
-    puts "\nUsage: unity_test_summary.rb result_file_directory/ root_path/"
+    puts "\nUsage: hunt_test_summary.rb result_file_directory/ root_path/"
     puts '     result_file_directory - The location of your results files.'
     puts '                             Defaults to current directory if not specified.'
     puts '                             Should end in / if specified.'
@@ -110,7 +110,7 @@ if $0 == __FILE__
   opts.map! { |v| v[2..-1].to_sym }
 
   # create an instance to work with
-  uts = UnityTestSummary.new(opts)
+  uts = HuntTestSummary.new(opts)
 
   begin
     # look in the specified or current directory for result files

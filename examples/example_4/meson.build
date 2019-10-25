@@ -11,7 +11,7 @@
 
 project('example-4', 'c')
 
-unity_dep = dependency('unity', fallback : ['unity', 'unity_dep'])
+hunt_dep = dependency('hunt', fallback : ['hunt', 'hunt_dep'])
 
 subdir('src')
 subdir('test')

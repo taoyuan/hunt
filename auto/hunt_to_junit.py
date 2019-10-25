@@ -6,7 +6,7 @@ from pyparsing import *
 from junit_xml import TestSuite, TestCase
 
 
-class UnityTestSummary:
+class HuntTestSummary:
     def __init__(self):
         self.report = ''
         self.total_tests = 0
@@ -112,7 +112,7 @@ class UnityTestSummary:
         print("\nERROR: ")
         if err_msg:
             print(err_msg)
-        print("\nUsage: unity_test_summary.py result_file_directory/ root_path/")
+        print("\nUsage: hunt_test_summary.py result_file_directory/ root_path/")
         print("     result_file_directory - The location of your results files.")
         print("                             Defaults to current directory if not specified.")
         print("                             Should end in / if specified.")
@@ -121,7 +121,7 @@ class UnityTestSummary:
 
 
 if __name__ == '__main__':
-    uts = UnityTestSummary()
+    uts = HuntTestSummary()
     try:
         # look in the specified or current directory for result files
         if len(sys.argv) > 1:
@@ -143,4 +143,4 @@ if __name__ == '__main__':
         # run the summarizer
         print(uts.run())
     except Exception as e:
-        UnityTestSummary.usage(e)
+        HuntTestSummary.usage(e)

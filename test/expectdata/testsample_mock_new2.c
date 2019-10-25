@@ -3,11 +3,11 @@
 /*=======Test Runner Used To Run Each Test Below=====*/
 #define RUN_TEST(TestFunc, TestLineNum) \
 { \
-  Unity.CurrentTestName = #TestFunc; \
-  Unity.CurrentTestLineNumber = TestLineNum; \
-  Unity.NumberOfTests++; \
+  Hunt.CurrentTestName = #TestFunc; \
+  Hunt.CurrentTestLineNumber = TestLineNum; \
+  Hunt.NumberOfTests++; \
   CMock_Init(); \
-  UNITY_CLR_DETAILS(); \
+  HUNT_CLR_DETAILS(); \
   if (TEST_PROTECT()) \
   { \
       setUp(); \
@@ -19,11 +19,11 @@
     CMock_Verify(); \
   } \
   CMock_Destroy(); \
-  UnityConcludeTest(); \
+  HuntConcludeTest(); \
 }
 
 /*=======Automagically Detected Files To Include=====*/
-#include "unity.h"
+#include "hunt.h"
 #include "cmock.h"
 #include <setjmp.h>
 #include <stdio.h>
@@ -80,10 +80,10 @@ void resetTest(void)
 int main(void)
 {
   suite_setup();
-  UnityBegin("testdata/mocksample.c");
+  HuntBegin("testdata/mocksample.c");
   RUN_TEST(test_TheFirstThingToTest, 21);
   RUN_TEST(test_TheSecondThingToTest, 43);
 
   CMock_Guts_MemFreeFinal();
-  return suite_teardown(UnityEnd());
+  return suite_teardown(HuntEnd());
 }

@@ -1,6 +1,6 @@
 require 'yaml'
 require 'fileutils'
-require_relative '../../auto/unity_test_summary'
+require_relative '../../auto/hunt_test_summary'
 require_relative '../../auto/generate_test_runner'
 require_relative '../../auto/colour_reporter'
 
@@ -148,7 +148,7 @@ module RakefileHelpers
   end
 
   def report_summary
-    summary = UnityTestSummary.new
+    summary = HuntTestSummary.new
     summary.root = __dir__
     results_glob = "#{$cfg['compiler']['build_path']}*.test*"
     results_glob.tr!('\\', '/')
@@ -185,7 +185,7 @@ module RakefileHelpers
       runner_name = test_base + '_Runner.c'
       if $cfg['compiler']['runner_path'].nil?
         runner_path = $cfg['compiler']['build_path'] + runner_name
-        test_gen = UnityTestRunnerGenerator.new($cfg_file)
+        test_gen = HuntTestRunnerGenerator.new($cfg_file)
         test_gen.run(test, runner_path)
       else
         runner_path = $cfg['compiler']['runner_path'] + runner_name

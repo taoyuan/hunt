@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 #
-# unity_to_junit.rb
+# hunt_to_junit.rb
 #
 require 'fileutils'
 require 'optparse'
@@ -24,12 +24,12 @@ class ArgvParser
     options.out_file = 'results.xml'
 
     opts = OptionParser.new do |o|
-      o.banner = 'Usage: unity_to_junit.rb [options]'
+      o.banner = 'Usage: hunt_to_junit.rb [options]'
 
       o.separator ''
       o.separator 'Specific options:'
 
-      o.on('-r', '--results <dir>', 'Look for Unity Results files here.') do |results|
+      o.on('-r', '--results <dir>', 'Look for Hunt Results files here.') do |results|
         # puts "results #{results}"
         options.results_dir = results
       end
@@ -54,7 +54,7 @@ class ArgvParser
 
       # Another typical switch to print the version.
       o.on_tail('--version', 'Show version') do
-        puts "unity_to_junit.rb version #{VERSION}"
+        puts "hunt_to_junit.rb version #{VERSION}"
         exit
       end
     end
@@ -64,7 +64,7 @@ class ArgvParser
   end
 end
 
-class UnityToJUnit
+class HuntToJUnit
   include FileUtils::Verbose
   attr_reader :report, :total_tests, :failures, :ignored
   attr_writer :targets, :root, :out_file
@@ -120,10 +120,10 @@ class UnityToJUnit
   def usage(err_msg = nil)
     puts "\nERROR: "
     puts err_msg if err_msg
-    puts 'Usage: unity_to_junit.rb [options]'
+    puts 'Usage: hunt_to_junit.rb [options]'
     puts ''
     puts 'Specific options:'
-    puts '    -r, --results <dir>              Look for Unity Results files here.'
+    puts '    -r, --results <dir>              Look for Hunt Results files here.'
     puts '    -p, --root_path <path>           Prepend this path to files in results.'
     puts '    -o, --output <filename>          XML file to generate.'
     puts ''
@@ -177,7 +177,7 @@ class UnityToJUnit
   end
 
   def write_suite_header(counts, stream)
-    stream.puts "\t<testsuite errors=\"0\" skipped=\"#{counts[:ignored]}\" failures=\"#{counts[:failed]}\" tests=\"#{counts[:total]}\" name=\"unity\">"
+    stream.puts "\t<testsuite errors=\"0\" skipped=\"#{counts[:ignored]}\" failures=\"#{counts[:failed]}\" tests=\"#{counts[:total]}\" name=\"hunt\">"
   end
 
   def write_failures(results, stream)
@@ -224,7 +224,7 @@ if $0 == __FILE__
   options = ArgvParser.parse(ARGV)
 
   # create an instance to work with
-  utj = UnityToJUnit.new
+  utj = HuntToJUnit.new
   begin
     # look in the specified or current directory for result files
     targets = "#{options.results_dir.tr('\\', '/')}**/*.test*"

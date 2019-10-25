@@ -1,7 +1,7 @@
 /* This Test File Is Used To Verify Many Combinations Of Using the Generate Test Runner Script */
 
 #include <stdio.h>
-#include "unity.h"
+#include "hunt.h"
 #include "Defs.h"
 
 TEST_FILE("some_file.c")

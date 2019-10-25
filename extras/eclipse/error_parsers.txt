@@ -17,7 +17,7 @@ Either add this to your make/rakefile, or add it as a post-
 build step in your Eclipse project settings.
 
 
-Unity unit test error parsers
+Hunt unit test error parsers
 -----------------------------
 Severity    Pattern                                 File    Line    Description
 -------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 #ifndef _TESTSAMPLE_HEAD1_H
 #define _TESTSAMPLE_HEAD1_H
 
-#include "unity.h"
+#include "hunt.h"
 #include "funky.h"
 #include "stanky.h"
 #include <setjmp.h>

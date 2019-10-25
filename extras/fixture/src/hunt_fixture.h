@@ -1,19 +1,19 @@
-/* Copyright (c) 2010 James Grenning and Contributed to Unity Project
+/* Copyright (c) 2010 James Grenning and Contributed to Hunt Project
  * ==========================================
- *  Unity Project - A Test Framework for C
+ *  Hunt Project - A Test Framework for C
  *  Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
  *  [Released under MIT License. Please refer to license.txt for details]
  * ========================================== */
 
-#ifndef UNITY_FIXTURE_H_
-#define UNITY_FIXTURE_H_
+#ifndef HUNT_FIXTURE_H_
+#define HUNT_FIXTURE_H_
 
-#include "unity.h"
-#include "unity_internals.h"
-#include "unity_fixture_malloc_overrides.h"
-#include "unity_fixture_internals.h"
+#include "hunt.h"
+#include "hunt_internals.h"
+#include "hunt_fixture_malloc_overrides.h"
+#include "hunt_fixture_internals.h"
 
-int UnityMain(int argc, const char* argv[], void (*runAllTests)(void));
+int HuntMain(int argc, const char* argv[], void (*runAllTests)(void));
 
 
 #define TEST_GROUP(group)\
@@ -31,7 +31,7 @@ int UnityMain(int argc, const char* argv[], void (*runAllTests)(void));
     void TEST_##group##_##name##_run(void);\
     void TEST_##group##_##name##_run(void)\
     {\
-        UnityTestRunner(TEST_##group##_SETUP,\
+        HuntTestRunner(TEST_##group##_SETUP,\
             TEST_##group##_##name##_,\
             TEST_##group##_TEAR_DOWN,\
             "TEST(" #group ", " #name ")",\
@@ -45,7 +45,7 @@ int UnityMain(int argc, const char* argv[], void (*runAllTests)(void));
     void TEST_##group##_##name##_run(void);\
     void TEST_##group##_##name##_run(void)\
     {\
-        UnityIgnoreTest("IGNORE_TEST(" #group ", " #name ")", TEST_GROUP_##group, #name);\
+        HuntIgnoreTest("IGNORE_TEST(" #group ", " #name ")", TEST_GROUP_##group, #name);\
     }\
     void TEST_##group##_##name##_(void)
 
@@ -65,9 +65,9 @@ int UnityMain(int argc, const char* argv[], void (*runAllTests)(void));
       TEST_##group##_GROUP_RUNNER(); }
 
 /* CppUTest Compatibility Macros */
-#ifndef UNITY_EXCLUDE_CPPUTEST_ASSERTS
+#ifndef HUNT_EXCLUDE_CPPUTEST_ASSERTS
 /* Sets a pointer and automatically restores it to its old value after teardown */
-#define UT_PTR_SET(ptr, newPointerValue)               UnityPointer_Set((void**)&(ptr), (void*)(newPointerValue), __LINE__)
+#define UT_PTR_SET(ptr, newPointerValue)               HuntPointer_Set((void**)&(ptr), (void*)(newPointerValue), __LINE__)
 #define TEST_ASSERT_POINTERS_EQUAL(expected, actual)   TEST_ASSERT_EQUAL_PTR((expected), (actual))
 #define TEST_ASSERT_BYTES_EQUAL(expected, actual)      TEST_ASSERT_EQUAL_HEX8(0xff & (expected), 0xff & (actual))
 #define FAIL(message)                                  TEST_FAIL_MESSAGE((message))
@@ -77,7 +77,7 @@ int UnityMain(int argc, const char* argv[], void (*runAllTests)(void));
 #define DOUBLES_EQUAL(expected, actual, delta)         TEST_ASSERT_DOUBLE_WITHIN((delta), (expected), (actual))
 #endif
 
-/* You must compile with malloc replacement, as defined in unity_fixture_malloc_overrides.h */
-void UnityMalloc_MakeMallocFailAfterCount(int countdown);
+/* You must compile with malloc replacement, as defined in hunt_fixture_malloc_overrides.h */
+void HuntMalloc_MakeMallocFailAfterCount(int countdown);
 
-#endif /* UNITY_FIXTURE_H_ */
+#endif /* HUNT_FIXTURE_H_ */

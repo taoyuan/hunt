@@ -1,18 +1,18 @@
-/* Copyright (c) 2010 James Grenning and Contributed to Unity Project
+/* Copyright (c) 2010 James Grenning and Contributed to Hunt Project
  * ==========================================
- *  Unity Project - A Test Framework for C
+ *  Hunt Project - A Test Framework for C
  *  Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
  *  [Released under MIT License. Please refer to license.txt for details]
  * ========================================== */
 
-#include "unity_fixture.h"
-#include "unity_internals.h"
+#include "hunt_fixture.h"
+#include "hunt_internals.h"
 #include <string.h>
 
-struct UNITY_FIXTURE_T UnityFixture;
+struct HUNT_FIXTURE_T HuntFixture;
 
 /* If you decide to use the function pointer approach.
- * Build with -D UNITY_OUTPUT_CHAR=outputChar and include <stdio.h>
+ * Build with -D HUNT_OUTPUT_CHAR=outputChar and include <stdio.h>
  * int (*outputChar)(int) = putchar; */
 
 void setUp(void)    { /*does nothing*/ }
@@ -20,30 +20,30 @@ void tearDown(void) { /*does nothing*/ }
 
 static void announceTestRun(unsigned int runNumber)
 {
-    UnityPrint("Unity test run ");
-    UnityPrintNumberUnsigned(runNumber+1);
-    UnityPrint(" of ");
-    UnityPrintNumberUnsigned(UnityFixture.RepeatCount);
-    UNITY_PRINT_EOL();
+    HuntPrint("Hunt test run ");
+    HuntPrintNumberUnsigned(runNumber+1);
+    HuntPrint(" of ");
+    HuntPrintNumberUnsigned(HuntFixture.RepeatCount);
+    HUNT_PRINT_EOL();
 }
 
-int UnityMain(int argc, const char* argv[], void (*runAllTests)(void))
+int HuntMain(int argc, const char* argv[], void (*runAllTests)(void))
 {
-    int result = UnityGetCommandLineOptions(argc, argv);
+    int result = HuntGetCommandLineOptions(argc, argv);
     unsigned int r;
     if (result != 0)
         return result;
 
-    for (r = 0; r < UnityFixture.RepeatCount; r++)
+    for (r = 0; r < HuntFixture.RepeatCount; r++)
     {
-        UnityBegin(argv[0]);
+        HuntBegin(argv[0]);
         announceTestRun(r);
         runAllTests();
-        if (!UnityFixture.Verbose) UNITY_PRINT_EOL();
-        UnityEnd();
+        if (!HuntFixture.Verbose) HUNT_PRINT_EOL();
+        HuntEnd();
     }
 
-    return (int)Unity.TestFailures;
+    return (int)Hunt.TestFailures;
 }
 
 static int selected(const char* filter, const char* name)
@@ -55,17 +55,17 @@ static int selected(const char* filter, const char* name)
 
 static int testSelected(const char* test)
 {
-    return selected(UnityFixture.NameFilter, test);
+    return selected(HuntFixture.NameFilter, test);
 }
 
 static int groupSelected(const char* group)
 {
-    return selected(UnityFixture.GroupFilter, group);
+    return selected(HuntFixture.GroupFilter, group);
 }
 
-void UnityTestRunner(unityfunction* setup,
-                     unityfunction* testBody,
-                     unityfunction* teardown,
+void HuntTestRunner(huntfunction* setup,
+                     huntfunction* testBody,
+                     huntfunction* teardown,
                      const char* printableName,
                      const char* group,
                      const char* name,
@@ -74,30 +74,30 @@ void UnityTestRunner(unityfunction* setup,
 {
     if (testSelected(name) && groupSelected(group))
     {
-        Unity.TestFile = file;
-        Unity.CurrentTestName = printableName;
-        Unity.CurrentTestLineNumber = line;
-        if (UnityFixture.Verbose)
+        Hunt.TestFile = file;
+        Hunt.CurrentTestName = printableName;
+        Hunt.CurrentTestLineNumber = line;
+        if (HuntFixture.Verbose)
         {
-            UnityPrint(printableName);
-        #ifndef UNITY_REPEAT_TEST_NAME
-            Unity.CurrentTestName = NULL;
+            HuntPrint(printableName);
+        #ifndef HUNT_REPEAT_TEST_NAME
+            Hunt.CurrentTestName = NULL;
         #endif
         }
-        else if (UnityFixture.Silent)
+        else if (HuntFixture.Silent)
         {
             /* Do Nothing */
         }
         else
         {
-            UNITY_OUTPUT_CHAR('.');
+            HUNT_OUTPUT_CHAR('.');
         }
 
-        Unity.NumberOfTests++;
-        UnityMalloc_StartTest();
-        UnityPointer_Init();
+        Hunt.NumberOfTests++;
+        HuntMalloc_StartTest();
+        HuntPointer_Init();
 
-        UNITY_EXEC_TIME_START();
+        HUNT_EXEC_TIME_START();
 
         if (TEST_PROTECT())
         {
@@ -110,32 +110,32 @@ void UnityTestRunner(unityfunction* setup,
         }
         if (TEST_PROTECT())
         {
-            UnityPointer_UndoAllSets();
-            if (!Unity.CurrentTestFailed)
-                UnityMalloc_EndTest();
+            HuntPointer_UndoAllSets();
+            if (!Hunt.CurrentTestFailed)
+                HuntMalloc_EndTest();
         }
-        UnityConcludeFixtureTest();
+        HuntConcludeFixtureTest();
     }
 }
 
-void UnityIgnoreTest(const char* printableName, const char* group, const char* name)
+void HuntIgnoreTest(const char* printableName, const char* group, const char* name)
 {
     if (testSelected(name) && groupSelected(group))
     {
-        Unity.NumberOfTests++;
-        Unity.TestIgnores++;
-        if (UnityFixture.Verbose)
+        Hunt.NumberOfTests++;
+        Hunt.TestIgnores++;
+        if (HuntFixture.Verbose)
         {
-            UnityPrint(printableName);
-            UNITY_PRINT_EOL();
+            HuntPrint(printableName);
+            HUNT_PRINT_EOL();
         }
-        else if (UnityFixture.Silent)
+        else if (HuntFixture.Silent)
         {
             /* Do Nothing */
         }
         else
         {
-            UNITY_OUTPUT_CHAR('!');
+            HUNT_OUTPUT_CHAR('!');
         }
     }
 }
@@ -147,35 +147,35 @@ void UnityIgnoreTest(const char* printableName, const char* group, const char* n
 static int malloc_count;
 static int malloc_fail_countdown = MALLOC_DONT_FAIL;
 
-void UnityMalloc_StartTest(void)
+void HuntMalloc_StartTest(void)
 {
     malloc_count = 0;
     malloc_fail_countdown = MALLOC_DONT_FAIL;
 }
 
-void UnityMalloc_EndTest(void)
+void HuntMalloc_EndTest(void)
 {
     malloc_fail_countdown = MALLOC_DONT_FAIL;
     if (malloc_count != 0)
     {
-        UNITY_TEST_FAIL(Unity.CurrentTestLineNumber, "This test leaks!");
+        HUNT_TEST_FAIL(Hunt.CurrentTestLineNumber, "This test leaks!");
     }
 }
 
-void UnityMalloc_MakeMallocFailAfterCount(int countdown)
+void HuntMalloc_MakeMallocFailAfterCount(int countdown)
 {
     malloc_fail_countdown = countdown;
 }
 
-/* These definitions are always included from unity_fixture_malloc_overrides.h */
+/* These definitions are always included from hunt_fixture_malloc_overrides.h */
 /* We undef to use them or avoid conflict with <stdlib.h> per the C standard */
 #undef malloc
 #undef free
 #undef calloc
 #undef realloc
 
-#ifdef UNITY_EXCLUDE_STDLIB_MALLOC
-static unsigned char unity_heap[UNITY_INTERNAL_HEAP_SIZE_BYTES];
+#ifdef HUNT_EXCLUDE_STDLIB_MALLOC
+static unsigned char hunt_heap[HUNT_INTERNAL_HEAP_SIZE_BYTES];
 static size_t heap_index;
 #else
 #include <stdlib.h>
@@ -188,26 +188,26 @@ typedef struct GuardBytes
 } Guard;
 
 
-#define UNITY_MALLOC_ALIGNMENT (UNITY_POINTER_WIDTH / 8)
+#define HUNT_MALLOC_ALIGNMENT (HUNT_POINTER_WIDTH / 8)
 static const char end[] = "END";
 
 
-static size_t unity_size_round_up(size_t size)
+static size_t hunt_size_round_up(size_t size)
 {
     size_t rounded_size;
 
-    rounded_size = ((size + UNITY_MALLOC_ALIGNMENT - 1) / UNITY_MALLOC_ALIGNMENT) * UNITY_MALLOC_ALIGNMENT;
+    rounded_size = ((size + HUNT_MALLOC_ALIGNMENT - 1) / HUNT_MALLOC_ALIGNMENT) * HUNT_MALLOC_ALIGNMENT;
 
     return rounded_size;
 }
 
-void* unity_malloc(size_t size)
+void* hunt_malloc(size_t size)
 {
     char* mem;
     Guard* guard;
     size_t total_size;
 
-    total_size = sizeof(Guard) + unity_size_round_up(size + sizeof(end));
+    total_size = sizeof(Guard) + hunt_size_round_up(size + sizeof(end));
 
     if (malloc_fail_countdown != MALLOC_DONT_FAIL)
     {
@@ -217,18 +217,18 @@ void* unity_malloc(size_t size)
     }
 
     if (size == 0) return NULL;
-#ifdef UNITY_EXCLUDE_STDLIB_MALLOC
-    if (heap_index + total_size > UNITY_INTERNAL_HEAP_SIZE_BYTES)
+#ifdef HUNT_EXCLUDE_STDLIB_MALLOC
+    if (heap_index + total_size > HUNT_INTERNAL_HEAP_SIZE_BYTES)
     {
         guard = NULL;
     }
     else
     {
-        guard = (Guard*)&unity_heap[heap_index];
+        guard = (Guard*)&hunt_heap[heap_index];
         heap_index += total_size;
     }
 #else
-    guard = (Guard*)UNITY_FIXTURE_MALLOC(total_size);
+    guard = (Guard*)HUNT_FIXTURE_MALLOC(total_size);
 #endif
     if (guard == NULL) return NULL;
     malloc_count++;
@@ -255,23 +255,23 @@ static void release_memory(void* mem)
     guard--;
 
     malloc_count--;
-#ifdef UNITY_EXCLUDE_STDLIB_MALLOC
+#ifdef HUNT_EXCLUDE_STDLIB_MALLOC
     {
         size_t block_size;
 
-        block_size = unity_size_round_up(guard->size + sizeof(end));
+        block_size = hunt_size_round_up(guard->size + sizeof(end));
 
-        if (mem == unity_heap + heap_index - block_size)
+        if (mem == hunt_heap + heap_index - block_size)
         {
             heap_index -= (sizeof(Guard) + block_size);
         }
     }
 #else
-    UNITY_FIXTURE_FREE(guard);
+    HUNT_FIXTURE_FREE(guard);
 #endif
 }
 
-void unity_free(void* mem)
+void hunt_free(void* mem)
 {
     int overrun;
 
@@ -284,30 +284,30 @@ void unity_free(void* mem)
     release_memory(mem);
     if (overrun)
     {
-        UNITY_TEST_FAIL(Unity.CurrentTestLineNumber, "Buffer overrun detected during free()");
+        HUNT_TEST_FAIL(Hunt.CurrentTestLineNumber, "Buffer overrun detected during free()");
     }
 }
 
-void* unity_calloc(size_t num, size_t size)
+void* hunt_calloc(size_t num, size_t size)
 {
-    void* mem = unity_malloc(num * size);
+    void* mem = hunt_malloc(num * size);
     if (mem == NULL) return NULL;
     memset(mem, 0, num * size);
     return mem;
 }
 
-void* unity_realloc(void* oldMem, size_t size)
+void* hunt_realloc(void* oldMem, size_t size)
 {
     Guard* guard = (Guard*)oldMem;
     void* newMem;
 
-    if (oldMem == NULL) return unity_malloc(size);
+    if (oldMem == NULL) return hunt_malloc(size);
 
     guard--;
     if (isOverrun(oldMem))
     {
         release_memory(oldMem);
-        UNITY_TEST_FAIL(Unity.CurrentTestLineNumber, "Buffer overrun detected during realloc()");
+        HUNT_TEST_FAIL(Hunt.CurrentTestLineNumber, "Buffer overrun detected during realloc()");
     }
 
     if (size == 0)
@@ -318,19 +318,19 @@ void* unity_realloc(void* oldMem, size_t size)
 
     if (guard->size >= size) return oldMem;
 
-#ifdef UNITY_EXCLUDE_STDLIB_MALLOC /* Optimization if memory is expandable */
+#ifdef HUNT_EXCLUDE_STDLIB_MALLOC /* Optimization if memory is expandable */
     {
-        size_t old_total_size = unity_size_round_up(guard->size + sizeof(end));
+        size_t old_total_size = hunt_size_round_up(guard->size + sizeof(end));
 
-        if ((oldMem == unity_heap + heap_index - old_total_size) &&
-            ((heap_index - old_total_size + unity_size_round_up(size + sizeof(end))) <= UNITY_INTERNAL_HEAP_SIZE_BYTES))
+        if ((oldMem == hunt_heap + heap_index - old_total_size) &&
+            ((heap_index - old_total_size + hunt_size_round_up(size + sizeof(end))) <= HUNT_INTERNAL_HEAP_SIZE_BYTES))
         {
-            release_memory(oldMem);    /* Not thread-safe, like unity_heap generally */
-            return unity_malloc(size); /* No memcpy since data is in place */
+            release_memory(oldMem);    /* Not thread-safe, like hunt_heap generally */
+            return hunt_malloc(size); /* No memcpy since data is in place */
         }
     }
 #endif
-    newMem = unity_malloc(size);
+    newMem = hunt_malloc(size);
     if (newMem == NULL) return NULL; /* Do not release old memory */
     memcpy(newMem, oldMem, guard->size);
     release_memory(oldMem);
@@ -346,19 +346,19 @@ struct PointerPair
     void* old_value;
 };
 
-static struct PointerPair pointer_store[UNITY_MAX_POINTERS];
+static struct PointerPair pointer_store[HUNT_MAX_POINTERS];
 static int pointer_index = 0;
 
-void UnityPointer_Init(void)
+void HuntPointer_Init(void)
 {
     pointer_index = 0;
 }
 
-void UnityPointer_Set(void** pointer, void* newValue, UNITY_LINE_TYPE line)
+void HuntPointer_Set(void** pointer, void* newValue, HUNT_LINE_TYPE line)
 {
-    if (pointer_index >= UNITY_MAX_POINTERS)
+    if (pointer_index >= HUNT_MAX_POINTERS)
     {
-        UNITY_TEST_FAIL(line, "Too many pointers set");
+        HUNT_TEST_FAIL(line, "Too many pointers set");
     }
     else
     {
@@ -369,7 +369,7 @@ void UnityPointer_Set(void** pointer, void* newValue, UNITY_LINE_TYPE line)
     }
 }
 
-void UnityPointer_UndoAllSets(void)
+void HuntPointer_UndoAllSets(void)
 {
     while (pointer_index > 0)
     {
@@ -379,14 +379,14 @@ void UnityPointer_UndoAllSets(void)
     }
 }
 
-int UnityGetCommandLineOptions(int argc, const char* argv[])
+int HuntGetCommandLineOptions(int argc, const char* argv[])
 {
     int i;
-    UnityFixture.Verbose = 0;
-    UnityFixture.Silent = 0;
-    UnityFixture.GroupFilter = 0;
-    UnityFixture.NameFilter = 0;
-    UnityFixture.RepeatCount = 1;
+    HuntFixture.Verbose = 0;
+    HuntFixture.Silent = 0;
+    HuntFixture.GroupFilter = 0;
+    HuntFixture.NameFilter = 0;
+    HuntFixture.RepeatCount = 1;
 
     if (argc == 1)
         return 0;
@@ -395,12 +395,12 @@ int UnityGetCommandLineOptions(int argc, const char* argv[])
     {
         if (strcmp(argv[i], "-v") == 0)
         {
-            UnityFixture.Verbose = 1;
+            HuntFixture.Verbose = 1;
             i++;
         }
         else if (strcmp(argv[i], "-s") == 0)
         {
-            UnityFixture.Silent = 1;
+            HuntFixture.Silent = 1;
             i++;
         }
         else if (strcmp(argv[i], "-g") == 0)
@@ -408,7 +408,7 @@ int UnityGetCommandLineOptions(int argc, const char* argv[])
             i++;
             if (i >= argc)
                 return 1;
-            UnityFixture.GroupFilter = argv[i];
+            HuntFixture.GroupFilter = argv[i];
             i++;
         }
         else if (strcmp(argv[i], "-n") == 0)
@@ -416,23 +416,23 @@ int UnityGetCommandLineOptions(int argc, const char* argv[])
             i++;
             if (i >= argc)
                 return 1;
-            UnityFixture.NameFilter = argv[i];
+            HuntFixture.NameFilter = argv[i];
             i++;
         }
         else if (strcmp(argv[i], "-r") == 0)
         {
-            UnityFixture.RepeatCount = 2;
+            HuntFixture.RepeatCount = 2;
             i++;
             if (i < argc)
             {
                 if (*(argv[i]) >= '0' && *(argv[i]) <= '9')
                 {
                     unsigned int digit = 0;
-                    UnityFixture.RepeatCount = 0;
+                    HuntFixture.RepeatCount = 0;
                     while (argv[i][digit] >= '0' && argv[i][digit] <= '9')
                     {
-                        UnityFixture.RepeatCount *= 10;
-                        UnityFixture.RepeatCount += (unsigned int)argv[i][digit++] - '0';
+                        HuntFixture.RepeatCount *= 10;
+                        HuntFixture.RepeatCount += (unsigned int)argv[i][digit++] - '0';
                     }
                     i++;
                 }
@@ -447,30 +447,30 @@ int UnityGetCommandLineOptions(int argc, const char* argv[])
     return 0;
 }
 
-void UnityConcludeFixtureTest(void)
+void HuntConcludeFixtureTest(void)
 {
-    if (Unity.CurrentTestIgnored)
+    if (Hunt.CurrentTestIgnored)
     {
-        Unity.TestIgnores++;
-        UNITY_PRINT_EOL();
+        Hunt.TestIgnores++;
+        HUNT_PRINT_EOL();
     }
-    else if (!Unity.CurrentTestFailed)
+    else if (!Hunt.CurrentTestFailed)
     {
-        if (UnityFixture.Verbose)
+        if (HuntFixture.Verbose)
         {
-            UnityPrint(" ");
-            UnityPrint(UnityStrPass);
-            UNITY_EXEC_TIME_STOP();
-            UNITY_PRINT_EXEC_TIME();
-            UNITY_PRINT_EOL();
+            HuntPrint(" ");
+            HuntPrint(HuntStrPass);
+            HUNT_EXEC_TIME_STOP();
+            HUNT_PRINT_EXEC_TIME();
+            HUNT_PRINT_EOL();
         }
     }
-    else /* Unity.CurrentTestFailed */
+    else /* Hunt.CurrentTestFailed */
     {
-        Unity.TestFailures++;
-        UNITY_PRINT_EOL();
+        Hunt.TestFailures++;
+        HUNT_PRINT_EOL();
     }
 
-    Unity.CurrentTestFailed = 0;
-    Unity.CurrentTestIgnored = 0;
+    Hunt.CurrentTestFailed = 0;
+    Hunt.CurrentTestIgnored = 0;
 }

@@ -1,17 +1,17 @@
-Unity Test API
+Hunt Test API
 ==============
 
-[![Unity Build Status](https://api.travis-ci.org/ThrowTheSwitch/Unity.png?branch=master)](https://travis-ci.org/ThrowTheSwitch/Unity)
-__Copyright (c) 2007 - 2019 Unity Project by Mike Karlesky, Mark VanderVoord, and Greg Williams__
+[![Hunt Build Status](https://api.travis-ci.org/taoyuan/Hunt.png?branch=master)](https://travis-ci.org/taoyuan/Hunt)
+__Copyright (c) 2007 - 2019 Hunt Project by Mike Karlesky, Mark VanderVoord, and Greg Williams__
 
 Getting Started
 ===============
-The [docs](docs/) folder contains a [getting started guide](docs/UnityGettingStartedGuide.md)
-and much more tips about using Unity. 
+The [docs](docs) folder contains a [getting started guide](docs/HuntGettingStartedGuide.md)
+and much more tips about using Hunt. 
 
-Unity Assertion Summary
+Hunt Assertion Summary
 =======================
-For the full list, see [UnityAssertionsReference.md](docs/UnityAssertionsReference.md).
+For the full list, see [HuntAssertionsReference.md](docs/HuntAssertionsReference.md).
 
 Basic Validity Tests
 --------------------

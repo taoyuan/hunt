@@ -1,6 +1,6 @@
-# Copied from ~Unity/targets/gcc_32.yml
-unity_root:  &unity_root '../..'
-unity_source: &unity_source '../../src/'
+# Copied from ~Hunt/targets/gcc_32.yml
+hunt_root:  &hunt_root '../..'
+hunt_source: &hunt_source '../../src/'
 compiler:
   path: gcc
   source_path:     &source_path 'src/'
@@ -17,13 +17,13 @@ compiler:
     prefix: '-I'
     items:
       - *source_path
-      - *unity_source
+      - *hunt_source
       - *unit_tests_path
   defines:
     prefix: '-D'
     items:
-      - UNITY_INCLUDE_DOUBLE
-      - UNITY_SUPPORT_TEST_CASES
+      - HUNT_INCLUDE_DOUBLE
+      - HUNT_SUPPORT_TEST_CASES
   object_files:
     prefix: '-o'
     extension: '.o'
@@ -43,5 +43,5 @@ linker:
     extension: '.exe'
     destination: *build_path
 colour: true
-:unity:
+:hunt:
   :plugins: []

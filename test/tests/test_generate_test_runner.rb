@@ -664,7 +664,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsThroughOptions',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -685,7 +685,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsThroughCommandLine',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :cmdline => "--cmdline_args=1",
     :expected => {
       :to_pass => [ 'test_ThisTestAlwaysPasses',
@@ -704,7 +704,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsThroughYAMLFile',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :cmdline => "",
     :yaml => {
       :cmdline_args => true,
@@ -726,7 +726,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsNameFilterJustTest',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -744,7 +744,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsNameFilterJustShould',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -758,7 +758,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsNameFilterTestAndShould',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -776,7 +776,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsNameFilterWithWildcardOnFile',
     :testfile => 'testdata/testRunnerGeneratorSmall.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -792,7 +792,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsNameFilterWithWildcardAsName',
     :testfile => 'testdata/testRunnerGeneratorSmall.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -808,7 +808,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsNameFilterWithWildcardOnName',
     :testfile => 'testdata/testRunnerGeneratorSmall.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -822,7 +822,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsNameFilterWithWildcardAndShortName',
     :testfile => 'testdata/testRunnerGeneratorSmall.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -836,7 +836,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsNameFilterWithWildcardOnBoth',
     :testfile => 'testdata/testRunnerGeneratorSmall.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -852,7 +852,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsExcludeFilterJustTest',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -870,7 +870,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeAndExcludeFilter',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
       :includes => ['Defs.h'],
@@ -889,7 +889,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeSingleTest',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -903,7 +903,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeSingleTestInSpecificFile',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -917,7 +917,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeTestFileWithExtension',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -931,7 +931,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeDoubleQuotes',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -945,7 +945,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeSingleQuotes',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -959,7 +959,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeAValidTestForADifferentFile',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -973,7 +973,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeNoTests',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -987,7 +987,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsExcludeAllTests',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -1001,7 +1001,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeFullFile',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -1023,7 +1023,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeWithAlternateFlag',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -1037,7 +1037,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncludeWithParameterized',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :cmdline => "--use_param_tests=1",
     :yaml => {
       :cmdline_args => true,
@@ -1057,7 +1057,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsList',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -1083,7 +1083,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsListParameterized',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :test_prefix => "paratest",
       :use_param_tests => true,
@@ -1107,7 +1107,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncompleteIncludeFlags',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -1122,7 +1122,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIncompleteExcludeFlags',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -1137,7 +1137,7 @@ RUNNER_TESTS = [
 
   { :name => 'ArgsIllegalFlags',
     :testfile => 'testdata/testRunnerGenerator.c',
-    :testdefines => ['TEST', 'UNITY_USE_COMMAND_LINE_ARGS'],
+    :testdefines => ['TEST', 'HUNT_USE_COMMAND_LINE_ARGS'],
     :options => {
       :cmdline_args => true,
     },
@@ -1159,7 +1159,7 @@ def runner_test(test, runner, expected, test_defines, cmdline_args)
   obj_list = [
     compile(runner, test_defines),
     compile(test, test_defines),
-    compile('../src/unity.c', test_defines),
+    compile('../src/hunt.c', test_defines),
   ]
 
   # Link the test executable
@@ -1226,7 +1226,7 @@ RUNNER_TESTS.each do |testset|
     #create a yaml file first if required
     yaml_option = ""
     if (testset[:yaml])
-      File.open("build/runner_options.yml",'w') {|f| f << { :unity => testset[:yaml] }.to_yaml }
+      File.open("build/runner_options.yml",'w') {|f| f << { :hunt => testset[:yaml] }.to_yaml }
       yaml_option = "build/runner_options.yml"
     end
 
@@ -1235,7 +1235,7 @@ RUNNER_TESTS.each do |testset|
       cmdstr = "ruby ../auto/generate_test_runner.rb #{yaml_option} #{testset[:cmdline]} \"#{testset[:testfile]}\" \"#{runner_name}\""
       `#{cmdstr}`
     else
-      UnityTestRunnerGenerator.new(testset[:options]).run(testset[:testfile], runner_name)
+      HuntTestRunnerGenerator.new(testset[:options]).run(testset[:testfile], runner_name)
     end
 
     #test the script against the specified test file and check results

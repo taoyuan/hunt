@@ -3,9 +3,9 @@
 /*=======Test Runner Used To Run Each Test Below=====*/
 #define RUN_TEST(TestFunc, TestLineNum) \
 { \
-  Unity.CurrentTestName = #TestFunc; \
-  Unity.CurrentTestLineNumber = TestLineNum; \
-  Unity.NumberOfTests++; \
+  Hunt.CurrentTestName = #TestFunc; \
+  Hunt.CurrentTestLineNumber = TestLineNum; \
+  Hunt.NumberOfTests++; \
   if (TEST_PROTECT()) \
   { \
       setUp(); \
@@ -15,11 +15,11 @@
   { \
     tearDown(); \
   } \
-  UnityConcludeTest(); \
+  HuntConcludeTest(); \
 }
 
 /*=======Automagically Detected Files To Include=====*/
-#include "unity.h"
+#include "hunt.h"
 #include <setjmp.h>
 #include <stdio.h>
 #include "ProductionCode2.h"
@@ -44,10 +44,10 @@ void resetTest(void)
 /*=======MAIN=====*/
 int main(void)
 {
-  UnityBegin("test/TestProductionCode2.c");
+  HuntBegin("test/TestProductionCode2.c");
   RUN_TEST(test_IgnoredTest, 18);
   RUN_TEST(test_AnotherIgnoredTest, 23);
   RUN_TEST(test_ThisFunctionHasNotBeenTested_NeedsToBeImplemented, 28);
 
-  return (UnityEnd());
+  return (HuntEnd());
 }

@@ -1,12 +1,12 @@
 /* ==========================================
-    Unity Project - A Test Framework for C
+    Hunt Project - A Test Framework for C
     Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
     [Released under MIT License. Please refer to license.txt for details]
 ========================================== */
 
 #include <setjmp.h>
 #include <stdio.h>
-#include "unity.h"
+#include "hunt.h"
 
 /* Support for Meta Test Rig */
 #define TEST_CASE(...)
@@ -21,27 +21,27 @@ void flushSpy(void) {}
 
 #define VERIFY_FAILS_END                                                       \
     }                                                                          \
-    Unity.CurrentTestFailed = (Unity.CurrentTestFailed != 0) ? 0 : 1;          \
-    if (Unity.CurrentTestFailed == 1) {                                        \
+    Hunt.CurrentTestFailed = (Hunt.CurrentTestFailed != 0) ? 0 : 1;          \
+    if (Hunt.CurrentTestFailed == 1) {                                        \
       SetToOneMeanWeAlreadyCheckedThisGuy = 1;                                 \
-      UnityPrintNumberUnsigned(Unity.CurrentTestLineNumber);                   \
-      UNITY_OUTPUT_CHAR(':');                                                  \
-      UnityPrint(Unity.CurrentTestName);                                       \
-      UnityPrint(":FAIL: [[[[ Test Should Have Failed But Did Not ]]]]");      \
-      UNITY_OUTPUT_CHAR('\n');                                                 \
+      HuntPrintNumberUnsigned(Hunt.CurrentTestLineNumber);                   \
+      HUNT_OUTPUT_CHAR(':');                                                  \
+      HuntPrint(Hunt.CurrentTestName);                                       \
+      HuntPrint(":FAIL: [[[[ Test Should Have Failed But Did Not ]]]]");      \
+      HUNT_OUTPUT_CHAR('\n');                                                 \
     }
 
 #define VERIFY_IGNORES_END                                                     \
     }                                                                          \
-    Unity.CurrentTestFailed = (Unity.CurrentTestIgnored != 0) ? 0 : 1;         \
-    Unity.CurrentTestIgnored = 0;                                              \
-    if (Unity.CurrentTestFailed == 1) {                                        \
+    Hunt.CurrentTestFailed = (Hunt.CurrentTestIgnored != 0) ? 0 : 1;         \
+    Hunt.CurrentTestIgnored = 0;                                              \
+    if (Hunt.CurrentTestFailed == 1) {                                        \
       SetToOneMeanWeAlreadyCheckedThisGuy = 1;                                 \
-      UnityPrintNumberUnsigned(Unity.CurrentTestLineNumber);                   \
-      UNITY_OUTPUT_CHAR(':');                                                  \
-      UnityPrint(Unity.CurrentTestName);                                       \
-      UnityPrint(":FAIL: [[[[ Test Should Have Ignored But Did Not ]]]]");     \
-      UNITY_OUTPUT_CHAR('\n');                                                 \
+      HuntPrintNumberUnsigned(Hunt.CurrentTestLineNumber);                   \
+      HUNT_OUTPUT_CHAR(':');                                                  \
+      HuntPrint(Hunt.CurrentTestName);                                       \
+      HuntPrint(":FAIL: [[[[ Test Should Have Ignored But Did Not ]]]]");     \
+      HUNT_OUTPUT_CHAR('\n');                                                 \
     }
 
 int SetToOneToFailInTearDown;
@@ -65,10 +65,10 @@ void tearDown(void)
 {
   if (SetToOneToFailInTearDown == 1)
     TEST_FAIL_MESSAGE("<= Failed in tearDown");
-  if ((SetToOneMeanWeAlreadyCheckedThisGuy == 0) && (Unity.CurrentTestFailed > 0))
+  if ((SetToOneMeanWeAlreadyCheckedThisGuy == 0) && (Hunt.CurrentTestFailed > 0))
   {
-    UnityPrint(": [[[[ Test Should Have Passed But Did Not ]]]]");
-    UNITY_OUTPUT_CHAR('\n');
+    HuntPrint(": [[[[ Test Should Have Passed But Did Not ]]]]");
+    HUNT_OUTPUT_CHAR('\n');
   }
 }
 
