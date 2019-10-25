@@ -4,6 +4,15 @@ Hunt Test API
 [![Hunt Build Status](https://api.travis-ci.org/taoyuan/Hunt.png?branch=master)](https://travis-ci.org/taoyuan/Hunt)
 __Copyright (c) 2007 - 2019 Hunt Project by Mike Karlesky, Mark VanderVoord, and Greg Williams__
 
+## Why `Hunt`
+
+`Hunt` is forked from great `Unity` and renamed to `Hunt` to avoid clash with the builtin unit test framework (Unity) 
+of [platformio](https://platformio.org).
+
+In `platformio`, we can debug with the main source code , but can not debug with unit test. On the other side, 
+we can use `unity` with unit test, but can not use it with main source code. Sometimes, we need debug unit test code.
+So I import the modification version of `unity` to do that. 
+
 Getting Started
 ===============
 The [docs](docs) folder contains a [getting started guide](docs/HuntGettingStartedGuide.md)
