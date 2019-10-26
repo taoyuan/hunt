@@ -11,7 +11,7 @@ extern "C"
 
 #define HUNT_OUTPUT_CHAR(a)    output_char(a)
 #define HUNT_OUTPUT_FLUSH()    output_flush()
-#define HUNT_OUTPUT_START()    output_start(9600)
+#define HUNT_OUTPUT_START()    output_start(115200)
 #define HUNT_OUTPUT_COMPLETE() output_complete()
 
 
