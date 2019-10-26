@@ -13,7 +13,7 @@
 #include "hunt_fixture_malloc_overrides.h"
 #include "hunt_fixture_internals.h"
 
-int HuntMain(int argc, const char* argv[], void (*runAllTests)(void));
+int HuntMain(int argc, const char *argv[], void (*runAllTests)(void));
 
 
 #define TEST_GROUP(group)\

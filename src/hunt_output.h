@@ -15,8 +15,11 @@ extern "C"
 #endif
 
 void output_char(int a);
+
 void output_flush(void);
+
 void output_start(unsigned int baudrate);
+
 void output_complete(void);
 
 #ifdef __cplusplus

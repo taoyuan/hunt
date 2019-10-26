@@ -26,12 +26,14 @@ extern "C"
 
 /* These functions are intended to be called before and after each test. */
 void setUp(void);
+
 void tearDown(void);
 
 /* These functions are intended to be called at the beginning and end of an
  * entire test suite.  suiteTearDown() is passed the number of tests that
  * failed, and its return value becomes the exit code of main(). */
 void suiteSetUp(void);
+
 int suiteTearDown(int num_failures);
 
 /* If the compiler supports it, the following block provides stub
@@ -40,21 +42,21 @@ int suiteTearDown(int num_failures);
  * to be in the same translation unit they are called from.  This can be
  * achieved by defining HUNT_INCLUDE_SETUP_STUBS before including hunt.h. */
 #ifdef HUNT_INCLUDE_SETUP_STUBS
-  #ifdef HUNT_WEAK_ATTRIBUTE
-    HUNT_WEAK_ATTRIBUTE void setUp(void) { }
-    HUNT_WEAK_ATTRIBUTE void tearDown(void) { }
-    HUNT_WEAK_ATTRIBUTE void suiteSetUp(void) { }
-    HUNT_WEAK_ATTRIBUTE int suiteTearDown(int num_failures) { return num_failures; }
-  #elif defined(HUNT_WEAK_PRAGMA)
-    #pragma weak setUp
-    void setUp(void) { }
-    #pragma weak tearDown
-    void tearDown(void) { }
-    #pragma weak suiteSetUp
-    void suiteSetUp(void) { }
-    #pragma weak suiteTearDown
-    int suiteTearDown(int num_failures) { return num_failures; }
-  #endif
+#ifdef HUNT_WEAK_ATTRIBUTE
+HUNT_WEAK_ATTRIBUTE void setUp(void) { }
+HUNT_WEAK_ATTRIBUTE void tearDown(void) { }
+HUNT_WEAK_ATTRIBUTE void suiteSetUp(void) { }
+HUNT_WEAK_ATTRIBUTE int suiteTearDown(int num_failures) { return num_failures; }
+#elif defined(HUNT_WEAK_PRAGMA)
+#pragma weak setUp
+void setUp(void) { }
+#pragma weak tearDown
+void tearDown(void) { }
+#pragma weak suiteSetUp
+void suiteSetUp(void) { }
+#pragma weak suiteTearDown
+int suiteTearDown(int num_failures) { return num_failures; }
+#endif
 #endif
 
 /*-------------------------------------------------------
