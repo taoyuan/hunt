@@ -98,11 +98,12 @@ void HuntTestRunner(huntfunction *setup,
     }
     if (TEST_PROTECT()) {
       HuntPointer_UndoAllSets();
-      if (!Hunt.CurrentTestFailed)
+      if (!Hunt.CurrentTestFailed) {
         if (HuntFixture.Verbose) {
           HuntPrint(printableName);
         }
         HuntMalloc_EndTest();
+      }
     }
     HuntConcludeFixtureTest();
   }
