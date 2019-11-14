@@ -8,8 +8,11 @@
 # License: MIT                                                                    #
 #                                                                                 #
 ###################################################################################
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
+if(ZEPHYR_BASE)
+include(CMakeListsZephyr.txt)
+else()
+cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 project(hunt LANGUAGES C DESCRIPTION "C Unit testing framework.")
 
@@ -38,3 +41,4 @@ install(EXPORT huntConfig DESTINATION share/huntConfig/cmake)
 
 # This makes the project importable from the build directory
 export(TARGETS hunt FILE huntConfig.cmake)
+endif()

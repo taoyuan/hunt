@@ -1,0 +1,18 @@
+if (CONFIG_HUNT)
+  zephyr_interface_library_named(hunt)
+
+  target_include_directories(hunt INTERFACE src)
+
+  zephyr_library()
+
+  file(
+    GLOB
+    hunt_sources # This is an output parameter
+    src/*
+  )
+
+  zephyr_library_sources(
+    ${hunt_sources}
+  )
+  zephyr_library_link_libraries(hunt)
+endif ()

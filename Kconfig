@@ -1,0 +1,17 @@
+menuconfig HUNT
+	bool "HUNT support"
+	help
+	  Enables support for HUNT.
+
+if HUNT
+
+config APP_LINK_WITH_HUNT
+	bool "Link 'app' with HUNT"
+	default y
+	help
+	  Add HUNT header files to the 'app' include path. It may be
+	  disabled if the include paths for HUNT are causing aliasing
+	  issues for 'app'.
+
+endif # HUNT
+
